@@ -1,8 +1,8 @@
 { self, inputs, ... }: 
 {
-  flake.nixosModules.git = { pkgs, ... }: {
+  flake.nixosModules.git = { pkgs, username, ... }: {
     
-    home-manager.users.izanagi = {
+    home-manager.users.${username} = {
       programs.git = {
         enable = true;
         settings = {

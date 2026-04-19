@@ -1,6 +1,6 @@
 { self, inputs, ... }: {
 
-  flake.nixosModules.homeManager = { pkgs, lib, ... }: {
+  flake.nixosModules.homeManager = { pkgs, lib, username, ... }: {
 
     # Import the official Home Manager NixOS module using the inputs passed by import-tree
     imports = [
@@ -11,8 +11,7 @@
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
 
-    # IMPORTANT: Replace 'yourusername' with your actual NixOS username!
-    home-manager.users.izanagi = { ## поменять на env
+    home-manager.users.${username} = {
       home.stateVersion = "26.05";
     };
   };

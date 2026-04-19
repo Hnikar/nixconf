@@ -3,5 +3,9 @@
     modules = [
       self.nixosModules.hostAmaterasuConfiguration
     ];
+    specialArgs = { 
+      inherit inputs; 
+      username = "izanagi";
+    };
   };
 }
