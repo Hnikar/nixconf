@@ -12,6 +12,7 @@
       self.nixosModules.vscode
       self.nixosModules.steam
       self.nixosModules.git
+      self.nixosModules.fish
     ];
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -59,7 +60,7 @@
 
       baobab
       gnome-disk-utility
-      
+
       distrobox
       distroshelf
 
