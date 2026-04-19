@@ -13,6 +13,7 @@
       self.nixosModules.steam
       self.nixosModules.git
       self.nixosModules.fish
+      self.nixosModules.spicetify
     ];
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];

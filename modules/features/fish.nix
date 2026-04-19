@@ -1,14 +1,15 @@
 { self, inputs, ... }: {
   flake.nixosModules.fish = { pkgs, username, ...}: {
     
-    # 1. Enable fish system-wide (This fixes the error)
+    users.users.${username}.shell = pkgs.fish;
+    
     programs.fish.enable = true; 
 
-    # 2. Configure fish for your specific user via Home Manager
     home-manager.users.${username} = {
       programs.fish = {
         enable = true;
         package = pkgs.fish;
+        interactiveShellInit = '' set fish_greeting '';
         plugins = [
           {
             name = "pure";
