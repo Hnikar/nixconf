@@ -56,10 +56,10 @@
       btop
       yazi
       ghostty
+
       baobab
-      #gnome-disk-utility
-      #polkit # Чет дописать?
-      gparted
+      gnome-disk-utility
+      
       distrobox
       distroshelf
 
