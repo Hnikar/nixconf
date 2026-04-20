@@ -9,13 +9,12 @@
     
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
 
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-
-  # vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
 
   };
 
