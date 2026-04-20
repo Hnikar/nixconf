@@ -12,6 +12,7 @@
           enabledExtensions = with spicePkgs.extensions; [
             adblock
             hidePodcasts
+            catJamSynced
           ];
           enabledCustomApps = with spicePkgs.apps; [
             ncsVisualizer
