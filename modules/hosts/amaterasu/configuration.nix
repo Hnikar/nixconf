@@ -51,20 +51,24 @@
     nixpkgs.config.allowUnfree = true;
     
     environment.systemPackages = with pkgs; [
+      # Cli
       wget
-      neovim
-      brave
       fastfetch
       btop
       yazi
-      ghostty
-
+      neovim
+      
+      # Utilities
       baobab
       gnome-disk-utility
 
+      # Containers
       distrobox
       distroshelf
 
+      # Apps
+      brave
+      ghostty
       nautilus
       signal-desktop
       joplin-desktop # setup

@@ -1,21 +1,24 @@
 { self, inputs, ... }: {
   flake.nixosModules.spicetify = { pkgs, username, ... }: {
-    
     home-manager.users.${username} = {
-      programs.spicetify = {
-        enable = true;
-        theme = "dribbblish";
-        #colorScheme = "dark";
-        #enableExtension = true;
-        extensionSources = [
-          {
-            name = "marketplace";
-            src = pkgs.spicetify-cli + "/share/spicetify/Extensions/marketplace.js";
-            dest = "Extensions/marketplace.js";
-          }
-        ];
-      };
+      imports = [
+        inputs.spicetify-nix.homeManagerModules.default
+      ];
+      programs.spicetify = 
+        let spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system}; 
+          in
+        {
+          enable = true;
+          enabledExtensions = with spicePkgs.extensions; [
+            adblock
+            hidePodcasts
+          ];
+          enabledCustomApps = with spicePkgs.apps; [
+            ncsVisualizer
+          ];
+          theme = spicePkgs.themes.text;
+          colorScheme = "Kanagawa";
+        };
     };
-    
   };
 }
