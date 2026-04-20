@@ -1,7 +1,7 @@
 { self, inputs, ... }: {
   flake.nixosModules.vscode = { pkgs, username, ...}: 
   let
-    marketplace = inputs.nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace;
+    marketplace = inputs.nix-vscode-extensions.extensions.${pkgs.stdenv.hostPlatform.system}.vscode-marketplace;
   in {
     home-manager.users.${username} = {
       programs.vscode = {
