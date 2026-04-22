@@ -30,15 +30,18 @@
           # Terminal
           "Mod+Return".spawn-sh = lib.getExe pkgs.ghostty;
 
+
           # Apps
           "Mod+E".spawn-sh = lib.getExe pkgs.nautilus;
           "Mod+B".spawn-sh = lib.getExe pkgs.brave;
+
 
           # Core
           "Mod+S".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call launcher toggle";
           "Mod+Space".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call controlCenter toggle";
           "Mod+Comma".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call settings toggle";
           "Mod+Q".close-window = {};
+
 
           # Window & Column Navigation
           ## Using Arrows
@@ -48,13 +51,56 @@
           "Mod+Down".focus-window-down = {};
           
           ## Using Vi-keys (HJKL)
-          "Mod+H".focus-column-left = {};
-          "Mod+L".focus-column-right = {};
-          "Mod+K".focus-window-up = {};
-          "Mod+J".focus-window-down = {};
+          # "Mod+H".focus-column-left = {};
+          # "Mod+L".focus-column-right = {};
+          # "Mod+K".focus-window-up = {};
+          # "Mod+J".focus-window-down = {};
           
           "Mod+Home".focus-column-first = {};
           "Mod+End".focus-column-last = {};
+
+
+          # Window & Column Movement
+          "Mod+Ctrl+Left".move-column-left = {};
+          "Mod+Ctrl+Right".move-column-right = {};
+          "Mod+Ctrl+Up".move-window-up = {};
+          "Mod+Ctrl+Down".move-window-down = {};
+
+          "Mod+Ctrl+Shift+Down".move-column-to-workspace-down = {};
+          "Mod+Ctrl+Shift+Up".move-column-to-workspace-up = {};
+
+          "Mod+R".switch-preset-column-width = {};
+
+          "Mod+BracketLeft".consume-or-expel-window-left = {};
+          "Mod+BracketRight".consume-or-expel-window-right = {};
+          
+          # "Mod+Ctrl+H".move-column-left = {};
+          # "Mod+Ctrl+L".move-column-right = {};
+          # "Mod+Ctrl+K".move-window-up = {};
+          # "Mod+Ctrl+J".move-window-down = {};
+          
+
+          # Move to Workspace
+          "Mod+Ctrl+1".move-column-to-workspace = 1;
+          "Mod+Ctrl+2".move-column-to-workspace = 2;
+          "Mod+Ctrl+3".move-column-to-workspace = 3;
+          "Mod+Ctrl+4".move-column-to-workspace = 4;
+          "Mod+Ctrl+5".move-column-to-workspace = 5;
+          "Mod+Ctrl+6".move-column-to-workspace = 6;
+          "Mod+Ctrl+7".move-column-to-workspace = 7;
+          "Mod+Ctrl+8".move-column-to-workspace = 8;
+          "Mod+Ctrl+9".move-column-to-workspace = 9;
+
+          "Mod+Shift+1".move-column-to-workspace = 1;
+          "Mod+Shift+2".move-column-to-workspace = 2;
+          "Mod+Shift+3".move-column-to-workspace = 3;
+          "Mod+Shift+4".move-column-to-workspace = 4;
+          "Mod+Shift+5".move-column-to-workspace = 5;
+          "Mod+Shift+6".move-column-to-workspace = 6;
+          "Mod+Shift+7".move-column-to-workspace = 7;
+          "Mod+Shift+8".move-column-to-workspace = 8;
+          "Mod+Shift+9".move-column-to-workspace = 9;
+
 
           # Monitor Navigation
           "Mod+Shift+Left".focus-monitor-left = {};
@@ -65,11 +111,12 @@
           "Mod+Shift+Ctrl+Left".move-column-to-monitor-left = {};
           "Mod+Shift+Ctrl+Right".move-column-to-monitor-right = {};
 
+
           #  Layout & Window Modes
           "Mod+F".maximize-column = {};
           "Mod+Shift+F".fullscreen-window = {};
           "Mod+C".center-column = {};
-          "Mod+Minus".set-column-width = "-10%";
+          "Mod+Minus".set-column-width = "-10%"; ## хз 25 или 10
           "Mod+Equal".set-column-width = "+10%";
           "Mod+Shift+Minus".set-window-height = "-10%";
           "Mod+Shift+Equal".set-window-height = "+10%";
@@ -77,6 +124,9 @@
           "Mod+T".toggle-window-floating = {};
           "Mod+W".toggle-column-tabbed-display = {};
           "Mod+O".toggle-overview = {};
+
+          "Mod+Shift+T".switch-focus-between-floating-and-tiling = {};
+
 
           # Workspace Management
           "Mod+1".focus-workspace = 1;
@@ -90,15 +140,6 @@
           "Mod+9".focus-workspace = 9;
           "Mod+Tab".focus-workspace-previous = {};  
 
-          "Mod+Shift+1".move-column-to-workspace = 1;
-          "Mod+Shift+2".move-column-to-workspace = 2;
-          "Mod+Shift+3".move-column-to-workspace = 3;
-          "Mod+Shift+4".move-column-to-workspace = 4;
-          "Mod+Shift+5".move-column-to-workspace = 5;
-          "Mod+Shift+6".move-column-to-workspace = 6;
-          "Mod+Shift+7".move-column-to-workspace = 7;
-          "Mod+Shift+8".move-column-to-workspace = 8;
-          "Mod+Shift+9".move-column-to-workspace = 9;
 
           # Scroll Navigation
           "Mod+WheelScrollDown".focus-column-left = {};
@@ -106,15 +147,18 @@
           "Mod+Ctrl+WheelScrollDown".focus-workspace-down = {};
           "Mod+Ctrl+WheelScrollUp".focus-workspace-up = {};
 
+
           # Screenshots
           "Print".screenshot = {};
           "Ctrl+Print".screenshot-screen = {};
           "Alt+Print".screenshot-window = {};
 
+
           # Misc
           "Mod+Shift+Escape".show-hotkey-overlay = {};
           #"Mod+Shift+P".power-off-monitors = {};
-          #"Ctrl+Alt+Delete".quit = {};
+          "Ctrl+Alt+Delete".quit = {};
+
 
           # Media
           "XF86AudioRaiseVolume".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume increase";
