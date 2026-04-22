@@ -91,15 +91,15 @@
           "Mod+Ctrl+8".move-column-to-workspace = 8;
           "Mod+Ctrl+9".move-column-to-workspace = 9;
 
-          "Mod+Shift+1".move-column-to-workspace = 1;
-          "Mod+Shift+2".move-column-to-workspace = 2;
-          "Mod+Shift+3".move-column-to-workspace = 3;
-          "Mod+Shift+4".move-column-to-workspace = 4;
-          "Mod+Shift+5".move-column-to-workspace = 5;
-          "Mod+Shift+6".move-column-to-workspace = 6;
-          "Mod+Shift+7".move-column-to-workspace = 7;
-          "Mod+Shift+8".move-column-to-workspace = 8;
-          "Mod+Shift+9".move-column-to-workspace = 9;
+          "Mod+Shift+1".move-window-to-workspace = 1;
+          "Mod+Shift+2".move-window-to-workspace = 2;
+          "Mod+Shift+3".move-window-to-workspace = 3;
+          "Mod+Shift+4".move-window-to-workspace = 4;
+          "Mod+Shift+5".move-window-to-workspace = 5;
+          "Mod+Shift+6".move-window-to-workspace = 6;
+          "Mod+Shift+7".move-window-to-workspace = 7;
+          "Mod+Shift+8".move-window-to-workspace = 8;
+          "Mod+Shift+9".move-window-to-workspace = 9;
 
 
           # Monitor Navigation
@@ -161,11 +161,19 @@
 
 
           # Media
-          "XF86AudioRaiseVolume".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume increase";
-          "XF86AudioLowerVolume".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume decrease";
-          "XF86AudioMute".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume muteOutput";
-          "XF86MonBrightnessUp".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call brightness increase";
-          "XF86MonBrightnessDown".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call brightness decrease";
+         "XF86AudioRaiseVolume".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume increase";
+         "XF86AudioLowerVolume".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume decrease";
+         "XF86AudioMute".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume muteOutput";
+         "XF86AudioMicMute".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume micmute";
+         
+         # Media Player Controls
+         "XF86AudioPlay".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call mpris playPause";
+         "XF86AudioNext".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call mpris next";
+         "XF86AudioPrev".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call mpris previous";
+         
+         # Brightness
+         "XF86MonBrightnessUp".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call brightness increase";
+         "XF86MonBrightnessDown".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call brightness decrease";
         };
       };
     };
