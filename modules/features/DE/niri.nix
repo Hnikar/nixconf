@@ -161,21 +161,22 @@
 
 
           # Media
-         "XF86AudioRaiseVolume".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume increase";
-         "XF86AudioLowerVolume".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume decrease";
-         "XF86AudioMute".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume muteOutput";
-         "XF86AudioMicMute".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume micmute";
+          "XF86AudioRaiseVolume".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume increase";
+          "XF86AudioLowerVolume".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume decrease";
+          "XF86AudioMute".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume muteOutput";
+          "XF86AudioMicMute".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume micmute";
+          
+          # Media Player Controls
+          "XF86AudioPlay".spawn-sh = "${lib.getExe pkgs.playerctl} play-pause";
+          "XF86AudioNext".spawn-sh = "${lib.getExe pkgs.playerctl} next";
+          "XF86AudioPrev".spawn-sh = "${lib.getExe pkgs.playerctl} previous";
          
-         # Media Player Controls
-         "XF86AudioPlay".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call mpris playPause";
-         "XF86AudioNext".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call mpris next";
-         "XF86AudioPrev".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call mpris previous";
-         
-         # Brightness
-         "XF86MonBrightnessUp".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call brightness increase";
-         "XF86MonBrightnessDown".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call brightness decrease";
+          # Brightness
+          #"XF86MonBrightnessUp".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call brightness increase";
+          #"XF86MonBrightnessDown".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call brightness decrease";
         };
       };
     };
   };
 }
+y
