@@ -3,7 +3,7 @@
     "settingsVersion": 59,
     "bar": {
       "barType": "simple",
-      "position": "top",
+      "position": "bottom",
       "monitors": [],
       "density": "default",
       "showOutline": false,
@@ -20,7 +20,7 @@
       "marginHorizontal": 4,
       "frameThickness": 8,
       "frameRadius": 12,
-      "outerCorners": true,
+      "outerCorners": false,
       "hideOnOverview": false,
       "displayMode": "always_visible",
       "autoHideDelay": 500,
@@ -256,7 +256,7 @@
       "tooltipsEnabled": true,
       "scrollbarAlwaysVisible": true,
       "boxBorderEnabled": false,
-      "panelBackgroundOpacity": 0.93,
+      "panelBackgroundOpacity": 1,
       "translucentWidgets": false,
       "panelsAttachedToBar": true,
       "settingsPanelMode": "attached",
@@ -639,6 +639,30 @@
         {
           "enabled": true,
           "id": "niri"
+        },
+        {
+          "enabled": true,
+          "id": "spicetify"
+        },
+        {
+          "enabled": true,
+          "id": "steam"
+        },
+        {
+          "enabled": true,
+          "id": "telegram"
+        },
+        {
+          "enabled": true,
+          "id": "code"
+        },
+        {
+          "enabled": true,
+          "id": "yazi"
+        },
+        {
+          "enabled": true,
+          "id": "alacritty"
         }
       ],
       "enableUserTheming": false

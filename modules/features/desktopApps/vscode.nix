@@ -10,16 +10,17 @@
         profiles.default.extensions = (with pkgs.vscode-extensions; [
           ms-azuretools.vscode-containers
           esbenp.prettier-vscode
-          
           asvetliakov.vscode-neovim
+          
           ms-vscode-remote.remote-containers
           github.copilot-chat
-        ]) ++ (with marketplace; [
-          qufiwefefwoyn.kanagawa
           jdinhlife.gruvbox
-         # noctalia.noctaliatheme
           jnoortheen.nix-ide
-        ]);
+        ]); 
+        #++ (with marketplace; [
+        #  qufiwefefwoyn.kanagawa
+        # # noctalia.noctaliatheme
+        #]);
       };
     };
   };
