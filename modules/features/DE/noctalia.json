@@ -101,7 +101,7 @@
             "id": "MediaMini",
             "maxWidth": 256,
             "panelShowAlbumArt": true,
-            "scrollingMode": "hover",
+            "scrollingMode": "always",
             "showAlbumArt": true,
             "showArtistFirst": true,
             "showProgressRing": true,
