@@ -93,7 +93,9 @@
             "textColor": "none",
             "useMonospaceFont": true,
             "usePadding": false
-          },
+          }
+        ],
+        "center": [
           {
             "compactMode": false,
             "hideMode": "hidden",
@@ -109,19 +111,6 @@
             "textColor": "none",
             "useFixedWidth": false,
             "visualizerType": "linear"
-          }
-        ],
-        "center": [
-          {
-            "colorizeIcons": false,
-            "hideMode": "hidden",
-            "id": "ActiveWindow",
-            "maxWidth": 145,
-            "scrollingMode": "hover",
-            "showIcon": true,
-            "showText": false,
-            "textColor": "none",
-            "useFixedWidth": false
           }
         ],
         "right": [

@@ -72,7 +72,7 @@
       nautilus
       signal-desktop
       joplin-desktop # setup
-
+      foliate
     ];
 
     
