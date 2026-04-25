@@ -18,7 +18,7 @@
             ncsVisualizer
           ];
           theme = spicePkgs.themes.text;
-          colorScheme = "Kanagawa";
+          colorScheme = "Gruvbox";
         };
     };
   };

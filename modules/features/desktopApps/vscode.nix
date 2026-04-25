@@ -16,6 +16,7 @@
           github.copilot-chat
         ]) ++ (with marketplace; [
           qufiwefefwoyn.kanagawa
+          jdinhlife.gruvbox
          # noctalia.noctaliatheme
           jnoortheen.nix-ide
         ]);

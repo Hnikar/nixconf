@@ -3,11 +3,11 @@
     "settingsVersion": 59,
     "bar": {
       "barType": "simple",
-      "position": "left",
+      "position": "top",
       "monitors": [],
-      "density": "comfortable",
+      "density": "default",
       "showOutline": false,
-      "showCapsule": false,
+      "showCapsule": true,
       "capsuleOpacity": 1,
       "capsuleColorKey": "none",
       "widgetSpacing": 6,
@@ -20,7 +20,7 @@
       "marginHorizontal": 4,
       "frameThickness": 8,
       "frameRadius": 12,
-      "outerCorners": false,
+      "outerCorners": true,
       "hideOnOverview": false,
       "displayMode": "always_visible",
       "autoHideDelay": 500,
@@ -29,13 +29,23 @@
       "widgets": {
         "left": [
           {
-            "colorizeDistroLogo": false,
             "colorizeSystemIcon": "none",
+            "colorizeSystemText": "none",
             "customIconPath": "",
             "enableColorization": false,
-            "icon": "noctalia",
-            "id": "ControlCenter",
+            "icon": "rocket",
+            "iconColor": "none",
+            "id": "Launcher",
             "useDistroLogo": false
+          },
+          {
+            "clockColor": "none",
+            "customFont": "",
+            "formatHorizontal": "HH:mm ddd, MMM dd",
+            "formatVertical": "HH mm - dd MM",
+            "id": "Clock",
+            "tooltipFormat": "HH:mm ddd, MMM dd",
+            "useCustomFont": false
           },
           {
             "compactMode": true,
@@ -60,22 +70,15 @@
             "usePadding": false
           },
           {
-            "defaultSettings": {
-              "autoPaste": false,
-              "autoPasteDelay": 300,
-              "autoPasteOnRightClick": false,
-              "cardColors": {},
-              "customColors": {},
-              "enableTodoIntegration": false,
-              "fullscreenMode": false,
-              "hidePanelBackground": false,
-              "notecardsEnabled": true,
-              "panelHeight": 0,
-              "panelWidth": 1450,
-              "pincardsEnabled": true,
-              "showCloseButton": true
-            },
-            "id": "plugin:clipper"
+            "colorizeIcons": false,
+            "hideMode": "hidden",
+            "id": "ActiveWindow",
+            "maxWidth": 145,
+            "scrollingMode": "hover",
+            "showIcon": true,
+            "showText": true,
+            "textColor": "none",
+            "useFixedWidth": false
           },
           {
             "compactMode": false,
@@ -107,7 +110,7 @@
             "hideUnoccupied": false,
             "iconScale": 0.8,
             "id": "Workspace",
-            "labelMode": "none",
+            "labelMode": "index",
             "occupiedColor": "secondary",
             "pillSize": 0.6,
             "showApplications": false,
@@ -119,26 +122,6 @@
         ],
         "right": [
           {
-            "displayMode": "onhover",
-            "iconColor": "none",
-            "id": "Volume",
-            "middleClickCommand": "pwvucontrol || pavucontrol",
-            "textColor": "none"
-          },
-          {
-            "displayMode": "forceOpen",
-            "iconColor": "none",
-            "id": "KeyboardLayout",
-            "showIcon": true,
-            "textColor": "none"
-          },
-          {
-            "displayMode": "onhover",
-            "iconColor": "none",
-            "id": "Network",
-            "textColor": "none"
-          },
-          {
             "blacklist": [],
             "chevronColor": "none",
             "colorizeIcons": false,
@@ -148,13 +131,45 @@
             "pinned": []
           },
           {
-            "clockColor": "none",
-            "customFont": "",
-            "formatHorizontal": "HH:mm ddd, MMM dd",
-            "formatVertical": "HH mm - dd MM",
-            "id": "Clock",
-            "tooltipFormat": "HH:mm ddd, MMM dd",
-            "useCustomFont": false
+            "hideWhenZero": false,
+            "hideWhenZeroUnread": false,
+            "iconColor": "none",
+            "id": "NotificationHistory",
+            "showUnreadBadge": true,
+            "unreadBadgeColor": "primary"
+          },
+          {
+            "deviceNativePath": "__default__",
+            "displayMode": "graphic-clean",
+            "hideIfIdle": false,
+            "hideIfNotDetected": true,
+            "id": "Battery",
+            "showNoctaliaPerformance": false,
+            "showPowerProfiles": false
+          },
+          {
+            "displayMode": "onhover",
+            "iconColor": "none",
+            "id": "Volume",
+            "middleClickCommand": "pwvucontrol || pavucontrol",
+            "textColor": "none"
+          },
+          {
+            "applyToAllMonitors": false,
+            "displayMode": "onhover",
+            "iconColor": "none",
+            "id": "Brightness",
+            "textColor": "none"
+          },
+          {
+            "colorizeDistroLogo": false,
+            "colorizeSystemIcon": "none",
+            "colorizeSystemText": "none",
+            "customIconPath": "",
+            "enableColorization": false,
+            "icon": "noctalia",
+            "id": "ControlCenter",
+            "useDistroLogo": false
           }
         ]
       },
@@ -175,8 +190,8 @@
       "showScreenCorners": false,
       "forceBlackScreenCorners": false,
       "scaleRatio": 1,
-      "radiusRatio": 0.5,
-      "iRadiusRatio": 0.25,
+      "radiusRatio": 1,
+      "iRadiusRatio": 1,
       "boxRadiusRatio": 1,
       "screenRadiusRatio": 1,
       "animationSpeed": 1,
@@ -241,14 +256,14 @@
       "tooltipsEnabled": true,
       "scrollbarAlwaysVisible": true,
       "boxBorderEnabled": false,
-      "panelBackgroundOpacity": 1,
+      "panelBackgroundOpacity": 0.93,
       "translucentWidgets": false,
       "panelsAttachedToBar": true,
       "settingsPanelMode": "attached",
       "settingsPanelSideBarCardStyle": false
     },
     "location": {
-      "name": "Poznan",
+      "name": "",
       "weatherEnabled": true,
       "weatherShowEffects": true,
       "weatherTaliaMascotAlways": false,
@@ -441,7 +456,7 @@
       "disableDesktopWidgets": true
     },
     "dock": {
-      "enabled": false,
+      "enabled": true,
       "position": "bottom",
       "displayMode": "auto_hide",
       "dockType": "floating",
@@ -590,7 +605,7 @@
     },
     "colorSchemes": {
       "useWallpaperColors": false,
-      "predefinedScheme": "Kanagawa",
+      "predefinedScheme": "Gruvbox",
       "darkMode": true,
       "schedulingMode": "off",
       "manualSunrise": "06:30",
@@ -600,7 +615,32 @@
       "syncGsettings": true
     },
     "templates": {
-      "activeTemplates": [],
+      "activeTemplates": [
+        {
+          "enabled": true,
+          "id": "gtk"
+        },
+        {
+          "enabled": true,
+          "id": "ghostty"
+        },
+        {
+          "enabled": true,
+          "id": "btop"
+        },
+        {
+          "enabled": true,
+          "id": "discord"
+        },
+        {
+          "enabled": true,
+          "id": "qt"
+        },
+        {
+          "enabled": true,
+          "id": "niri"
+        }
+      ],
       "enableUserTheming": false
     },
     "nightLight": {
@@ -678,7 +718,7 @@
       }
     },
     "notificationsState": {
-      "lastSeenTs": 1777088100000
+      "lastSeenTs": 1777091678000
     },
     "changelogState": {
       "lastSeenVersion": "v4.7.6"
