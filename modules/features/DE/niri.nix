@@ -26,6 +26,8 @@
         };
         layout.gaps = 5;
 
+        layout.focus-ring.active-color = "#fe8019";
+
         binds = {
           # Terminal
           "Mod+Return".spawn-sh = lib.getExe pkgs.ghostty;
