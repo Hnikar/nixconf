@@ -9,6 +9,7 @@
           in
         {
           enable = true;
+          #wayland = false;
           enabledExtensions = with spicePkgs.extensions; [
             adblock
             hidePodcasts

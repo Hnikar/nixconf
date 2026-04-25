@@ -30,6 +30,7 @@
           width = 2;
           active-color = "#fe8019";
         };
+        prefer-no-csd = true;
 
         binds = {
           # Terminal

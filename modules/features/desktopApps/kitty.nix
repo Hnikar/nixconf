@@ -14,7 +14,7 @@
     extraConfig = ''
      include themes/noctalia.conf
     '';
-    shellIntegration.'enableFishIntegration = true;
+    shellIntegration.enableFishIntegration = true;
     settings = {
         enable_audio_bell = "no";
         #font_size = 15;
