@@ -2,10 +2,10 @@
   "settings": {
     "settingsVersion": 59,
     "bar": {
-      "barType": "simple",
+      "barType": "framed",
       "position": "left",
       "monitors": [],
-      "density": "default",
+      "density": "comfortable",
       "showOutline": false,
       "showCapsule": true,
       "capsuleOpacity": 1,
@@ -28,15 +28,6 @@
       "showOnWorkspaceSwitch": true,
       "widgets": {
         "left": [
-          {
-            "colorizeSystemIcon": "none",
-            "customIconPath": "",
-            "enableColorization": false,
-            "icon": "rocket",
-            "iconColor": "none",
-            "id": "Launcher",
-            "useDistroLogo": false
-          },
           {
             "clockColor": "none",
             "customFont": "",
@@ -121,15 +112,6 @@
         ],
         "right": [
           {
-            "blacklist": [],
-            "chevronColor": "none",
-            "colorizeIcons": false,
-            "drawerEnabled": true,
-            "hidePassive": false,
-            "id": "Tray",
-            "pinned": []
-          },
-          {
             "hideWhenZero": false,
             "hideWhenZeroUnread": false,
             "iconColor": "none",
@@ -167,6 +149,27 @@
             "enableColorization": false,
             "icon": "noctalia",
             "id": "ControlCenter",
+            "useDistroLogo": false
+          },
+          {
+            "id": "plugin:privacy-indicator"
+          },
+          {
+            "blacklist": [],
+            "chevronColor": "none",
+            "colorizeIcons": false,
+            "drawerEnabled": true,
+            "hidePassive": false,
+            "id": "Tray",
+            "pinned": []
+          },
+          {
+            "colorizeSystemIcon": "none",
+            "customIconPath": "",
+            "enableColorization": false,
+            "icon": "rocket",
+            "iconColor": "none",
+            "id": "Launcher",
             "useDistroLogo": false
           }
         ]
@@ -670,7 +673,7 @@
     "openedPanel": "",
     "lockScreenActive": false,
     "wallpapers": {
-      "Virtual-1": "/nix/store/7j4a02nkk4ilda585jbjgg9f9i9b4ibb-noctalia-shell-4.7.5/share/noctalia-shell/Assets/Wallpaper/noctalia.png"
+      "Virtual-1": "/home/izanagi/Pictures/Wallpapers/ghibli-japanese-walled-garden.png"
     },
     "desktopWidgetsEditMode": false,
     "display": {
@@ -691,7 +694,7 @@
       }
     },
     "notificationsState": {
-      "lastSeenTs": 1776484864000
+      "lastSeenTs": 1776886918000
     },
     "changelogState": {
       "lastSeenVersion": "v4.7.5"
