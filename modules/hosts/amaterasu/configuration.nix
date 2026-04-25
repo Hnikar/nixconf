@@ -4,6 +4,8 @@
     imports = [
       self.nixosModules.hostAmaterasuHardware
 
+      self.nixosModules.plymouth
+
       self.nixosModules.niri
       
       self.nixosModules.homeManager
