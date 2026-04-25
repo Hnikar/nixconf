@@ -2,12 +2,12 @@
   "settings": {
     "settingsVersion": 59,
     "bar": {
-      "barType": "framed",
+      "barType": "simple",
       "position": "left",
       "monitors": [],
       "density": "comfortable",
       "showOutline": false,
-      "showCapsule": true,
+      "showCapsule": false,
       "capsuleOpacity": 1,
       "capsuleColorKey": "none",
       "widgetSpacing": 6,
@@ -20,7 +20,7 @@
       "marginHorizontal": 4,
       "frameThickness": 8,
       "frameRadius": 12,
-      "outerCorners": true,
+      "outerCorners": false,
       "hideOnOverview": false,
       "displayMode": "always_visible",
       "autoHideDelay": 500,
@@ -29,13 +29,13 @@
       "widgets": {
         "left": [
           {
-            "clockColor": "none",
-            "customFont": "",
-            "formatHorizontal": "HH:mm ddd, MMM dd",
-            "formatVertical": "HH mm - dd MM",
-            "id": "Clock",
-            "tooltipFormat": "HH:mm ddd, MMM dd",
-            "useCustomFont": false
+            "colorizeDistroLogo": false,
+            "colorizeSystemIcon": "none",
+            "customIconPath": "",
+            "enableColorization": false,
+            "icon": "noctalia",
+            "id": "ControlCenter",
+            "useDistroLogo": false
           },
           {
             "compactMode": true,
@@ -60,15 +60,22 @@
             "usePadding": false
           },
           {
-            "colorizeIcons": false,
-            "hideMode": "hidden",
-            "id": "ActiveWindow",
-            "maxWidth": 145,
-            "scrollingMode": "hover",
-            "showIcon": true,
-            "showText": true,
-            "textColor": "none",
-            "useFixedWidth": false
+            "defaultSettings": {
+              "autoPaste": false,
+              "autoPasteDelay": 300,
+              "autoPasteOnRightClick": false,
+              "cardColors": {},
+              "customColors": {},
+              "enableTodoIntegration": false,
+              "fullscreenMode": false,
+              "hidePanelBackground": false,
+              "notecardsEnabled": true,
+              "panelHeight": 0,
+              "panelWidth": 1450,
+              "pincardsEnabled": true,
+              "showCloseButton": true
+            },
+            "id": "plugin:clipper"
           },
           {
             "compactMode": false,
@@ -100,7 +107,7 @@
             "hideUnoccupied": false,
             "iconScale": 0.8,
             "id": "Workspace",
-            "labelMode": "index",
+            "labelMode": "none",
             "occupiedColor": "secondary",
             "pillSize": 0.6,
             "showApplications": false,
@@ -112,23 +119,6 @@
         ],
         "right": [
           {
-            "hideWhenZero": false,
-            "hideWhenZeroUnread": false,
-            "iconColor": "none",
-            "id": "NotificationHistory",
-            "showUnreadBadge": true,
-            "unreadBadgeColor": "primary"
-          },
-          {
-            "deviceNativePath": "__default__",
-            "displayMode": "graphic-clean",
-            "hideIfIdle": false,
-            "hideIfNotDetected": true,
-            "id": "Battery",
-            "showNoctaliaPerformance": false,
-            "showPowerProfiles": false
-          },
-          {
             "displayMode": "onhover",
             "iconColor": "none",
             "id": "Volume",
@@ -136,23 +126,17 @@
             "textColor": "none"
           },
           {
-            "applyToAllMonitors": false,
-            "displayMode": "onhover",
+            "displayMode": "forceOpen",
             "iconColor": "none",
-            "id": "Brightness",
+            "id": "KeyboardLayout",
+            "showIcon": true,
             "textColor": "none"
           },
           {
-            "colorizeDistroLogo": false,
-            "colorizeSystemIcon": "none",
-            "customIconPath": "",
-            "enableColorization": false,
-            "icon": "noctalia",
-            "id": "ControlCenter",
-            "useDistroLogo": false
-          },
-          {
-            "id": "plugin:privacy-indicator"
+            "displayMode": "onhover",
+            "iconColor": "none",
+            "id": "Network",
+            "textColor": "none"
           },
           {
             "blacklist": [],
@@ -164,13 +148,13 @@
             "pinned": []
           },
           {
-            "colorizeSystemIcon": "none",
-            "customIconPath": "",
-            "enableColorization": false,
-            "icon": "rocket",
-            "iconColor": "none",
-            "id": "Launcher",
-            "useDistroLogo": false
+            "clockColor": "none",
+            "customFont": "",
+            "formatHorizontal": "HH:mm ddd, MMM dd",
+            "formatVertical": "HH mm - dd MM",
+            "id": "Clock",
+            "tooltipFormat": "HH:mm ddd, MMM dd",
+            "useCustomFont": false
           }
         ]
       },
@@ -191,8 +175,8 @@
       "showScreenCorners": false,
       "forceBlackScreenCorners": false,
       "scaleRatio": 1,
-      "radiusRatio": 0.25,
-      "iRadiusRatio": 0.26,
+      "radiusRatio": 0.5,
+      "iRadiusRatio": 0.25,
       "boxRadiusRatio": 1,
       "screenRadiusRatio": 1,
       "animationSpeed": 1,
@@ -257,14 +241,14 @@
       "tooltipsEnabled": true,
       "scrollbarAlwaysVisible": true,
       "boxBorderEnabled": false,
-      "panelBackgroundOpacity": 0.93,
+      "panelBackgroundOpacity": 1,
       "translucentWidgets": false,
       "panelsAttachedToBar": true,
       "settingsPanelMode": "attached",
       "settingsPanelSideBarCardStyle": false
     },
     "location": {
-      "name": "",
+      "name": "Poznan",
       "weatherEnabled": true,
       "weatherShowEffects": true,
       "weatherTaliaMascotAlways": false,
@@ -694,10 +678,10 @@
       }
     },
     "notificationsState": {
-      "lastSeenTs": 1776886918000
+      "lastSeenTs": 1777088100000
     },
     "changelogState": {
-      "lastSeenVersion": "v4.7.5"
+      "lastSeenVersion": "v4.7.6"
     },
     "colorSchemesList": {
       "schemes": [],

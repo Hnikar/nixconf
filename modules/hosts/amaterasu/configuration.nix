@@ -74,6 +74,12 @@
       joplin-desktop # setup
 
     ];
+
+    #clipboard manager
+    home-manager.users.izanagi = {
+      services.cliphist.enable = true;
+    };
+
     services.udisks2.enable = true;
 
     # Keyring
