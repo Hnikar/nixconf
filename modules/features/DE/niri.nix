@@ -112,8 +112,8 @@
           # Monitor Navigation
           "Mod+Shift+Left".focus-monitor-left = {};
           "Mod+Shift+Right".focus-monitor-right = {};
-          "Mod+Shift+Up".focus-monitor-up = {};
-          "Mod+Shift+Down".focus-monitor-down = {};
+          #"Mod+Shift+Up".focus-monitor-up = {};
+          #"Mod+Shift+Down".focus-monitor-down = {};
           
           "Mod+Shift+Ctrl+Left".move-column-to-monitor-left = {};
           "Mod+Shift+Ctrl+Right".move-column-to-monitor-right = {};
@@ -145,7 +145,10 @@
           "Mod+7".focus-workspace = 7;
           "Mod+8".focus-workspace = 8;
           "Mod+9".focus-workspace = 9;
-          "Mod+Tab".focus-workspace-previous = {};  
+          "Mod+Tab".focus-workspace-previous = {}; 
+
+          "Mod+Shift+Up".focus-workspace-up = {};
+          "Mod+Shift+Down".focus-workspace-down = {}; 
 
 
           # Scroll Navigation
