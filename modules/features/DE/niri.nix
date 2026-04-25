@@ -26,7 +26,10 @@
         };
         layout.gaps = 5;
 
-        layout.focus-ring.active-color = "#fe8019";
+        layout.focus-ring = {
+          width = 2;
+          active-color = "#fe8019";
+        };
 
         binds = {
           # Terminal
