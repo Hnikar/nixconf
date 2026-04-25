@@ -69,7 +69,7 @@
 
       # Apps
       brave
-      ghostty
+      #ghostty
       nautilus
       signal-desktop
       joplin-desktop # setup
