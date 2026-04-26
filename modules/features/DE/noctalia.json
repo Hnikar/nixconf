@@ -663,19 +663,11 @@
       "activeTemplates": [
         {
           "enabled": true,
-          "id": "gtk"
-        },
-        {
-          "enabled": true,
           "id": "ghostty"
         },
         {
           "enabled": true,
           "id": "discord"
-        },
-        {
-          "enabled": true,
-          "id": "qt"
         },
         {
           "enabled": true,
@@ -712,6 +704,14 @@
         {
           "enabled": true,
           "id": "kitty"
+        },
+        {
+          "enabled": true,
+          "id": "qt"
+        },
+        {
+          "enabled": true,
+          "id": "gtk"
         }
       ],
       "enableUserTheming": false

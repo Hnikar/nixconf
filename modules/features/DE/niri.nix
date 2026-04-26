@@ -9,7 +9,8 @@
   perSystem = { pkgs, lib, self', ... }: {
     packages.myNiri = inputs.wrapper-modules.wrappers.niri.wrap {
       inherit pkgs; # THIS PART IS VERY IMPORTAINT, I FORGOT IT IN THE VIDEO!!!
-      #v2-settings = true;
+      # v2-settings = true;
+      
       settings = {
         spawn-at-startup = [
           (lib.getExe self'.packages.myNoctalia)
@@ -24,13 +25,24 @@
           repeat-rate = 40;
           repeat-delay = 250;
         };
+
         layout.gaps = 5;
 
         layout.focus-ring = {
           width = 2;
           active-color = "#fe8019";
         };
+
         prefer-no-csd = true;
+
+        # Steam Notification Fix
+        extraConfig = ''
+          window-rule {
+            match app-id="steam" title="^notificationtoasts_\\d+_desktop$"
+            default-floating-position x=10 y=10 relative-to="bottom-right"
+            open-focused false
+          }
+        '';
 
         binds = {
           # Terminal
