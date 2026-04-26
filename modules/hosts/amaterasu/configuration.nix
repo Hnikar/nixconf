@@ -77,6 +77,7 @@
       foliate
       onlyoffice-desktopeditors
       bitwarden-desktop
+      proton-vpn
     ];
 
     
