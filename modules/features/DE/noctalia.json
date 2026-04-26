@@ -188,12 +188,6 @@
               "terminalCommand": ""
             },
             "id": "plugin:tailscale"
-          },
-          {
-            "displayMode": "onhover",
-            "iconColor": "none",
-            "id": "VPN",
-            "textColor": "none"
           }
         ]
       },

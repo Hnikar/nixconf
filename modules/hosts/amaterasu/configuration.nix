@@ -51,6 +51,28 @@
       packages = with pkgs; [];
     };
 
+        home-manager.users.izanagi = { pkgs, ... }: {
+      # Clipboard manager
+      services.cliphist.enable = true;
+      
+      # Cursor theme
+      home.pointerCursor = {
+        name = "phinger-cursors-dark";
+        package = pkgs.phinger-cursors;  
+        size = 24;     
+        gtk.enable = true;
+        x11.enable = true;                
+      };
+      
+      gtk = {
+        enable = true; 
+        iconTheme = {
+          name = "Papirus-Dark";
+          package = pkgs.papirus-icon-theme;
+        };
+      };
+    };
+
     nixpkgs.config.allowUnfree = true;
     
     environment.systemPackages = with pkgs; [
@@ -73,29 +95,14 @@
       brave
       nautilus
       signal-desktop
-      joplin-desktop # setup
-      foliate
+      joplin-desktop
       onlyoffice-desktopeditors
+      foliate
+
+      # Security Apps
       bitwarden-desktop
       proton-vpn
     ];
-
-    
-    home-manager.users.izanagi = { pkgs, ... }: {
-      # Clipboard manager
-      services.cliphist.enable = true;
-
-      # Cursor theme
-      home.pointerCursor = {
-        name = "phinger-cursors-dark";
-        package = pkgs.phinger-cursors;  
-        size = 24;                     
-        
-        gtk.enable = true; 
-        x11.enable = true;
-      };
-      gtk.enable = true; 
-    };
 
     services.udisks2.enable = true;
 
