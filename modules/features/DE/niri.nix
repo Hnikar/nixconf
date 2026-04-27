@@ -34,14 +34,24 @@
         };
 
         prefer-no-csd = true;
-
         # Steam Notification Fix
         extraConfig = ''
           window-rule {
             match app-id="steam" title="^notificationtoasts_\\d+_desktop$"
             default-floating-position x=10 y=10 relative-to="bottom-right"
             open-focused false
-          }
+          };
+          window-rule {
+            match title="Picture in picture"
+            
+            default-floating-position x=10 y=10 relative-to="bottom-right"
+
+            open-floating true
+            open-focused false
+            
+            default-column-width { proportion 0.25; }
+            default-window-height { proportion 0.25; }
+          };
         '';
 
         binds = {
