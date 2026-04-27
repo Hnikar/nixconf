@@ -115,6 +115,9 @@
         ],
         "right": [
           {
+            "id": "plugin:kde-connect"
+          },
+          {
             "blacklist": [],
             "chevronColor": "none",
             "colorizeIcons": false,
@@ -764,28 +767,28 @@
     "openedPanel": "",
     "lockScreenActive": false,
     "wallpapers": {
-      "Virtual-1": "/home/izanagi/Pictures/Wallpapers/gruvbox-dark-rainbow.png"
+      "Virtual-1": "/nix/store/jjd0k65z3n5b6p7r3fb7ajy0map0wanr-noctalia-shell-4.7.6/share/noctalia-shell/Assets/Wallpaper/noctalia.png"
     },
     "desktopWidgetsEditMode": false,
     "display": {
-      "winit": {
+      "Virtual-1": {
         "connected": true,
-        "height": 728,
-        "name": "winit",
+        "height": 1280,
+        "name": "Virtual-1",
         "physical_height": 0,
         "physical_width": 0,
-        "refresh_rate": 60000,
+        "refresh_rate": 59999,
         "scale": 1,
-        "transform": "Flipped180",
+        "transform": "Normal",
         "vrr_enabled": false,
         "vrr_supported": false,
-        "width": 624,
+        "width": 2358,
         "x": 0,
         "y": 0
       }
     },
     "notificationsState": {
-      "lastSeenTs": 1777094442000
+      "lastSeenTs": 0
     },
     "changelogState": {
       "lastSeenVersion": "v4.7.6"

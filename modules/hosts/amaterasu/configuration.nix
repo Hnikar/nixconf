@@ -25,12 +25,15 @@
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.efi.efiSysMountPoint = "/boot";
     boot.loader.systemd-boot.enable = false;
-    boot.loader.grub = {
-            enable = true;
-            efiSupport = true;
-            device = "nodev";
+    boot.loader.grub = rec {
+      enable = true;
+      efiSupport = true;
+      device = "nodev";
+
+      theme = inputs.distro-grub-themes.packages.x86_64-linux.nixos-grub-theme;
+      splashImage = "${theme}/splash_image.jpg";
     };
-    boot.loader.grub.theme = inputs.distro-grub-themes.packages.x86_64-linux.nixos-grub-theme;
+    time.hardwareClockInLocalTime = true;
   
     networking.hostName = "Amaterasu";
   
@@ -99,6 +102,8 @@
       zip
       libsecret
       unrar
+      kdePackages.qt6ct
+      btrfs-assistant
 
       # Containers
       distrobox
@@ -112,7 +117,6 @@
       onlyoffice-desktopeditors
       foliate
       gnome-text-editor
-      btrfs-assistant
 
       # Security Apps
       bitwarden-desktop
@@ -124,11 +128,16 @@
 
     services.udisks2.enable = true;
 
+    programs.kdeconnect.enable = true;
+
     # Keyring
     services.gnome.gnome-keyring.enable = true;
     security.pam.services.gdm.enableGnomeKeyring = true;
 
     environment.variables.EDITOR = "nvim";
+
+    environment.variables.QT_QPA_PLATFORMTHEME = "qt6ct";
+
 
     services.displayManager.gdm.enable = true;
     system.stateVersion = "25.11";
