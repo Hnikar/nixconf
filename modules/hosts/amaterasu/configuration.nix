@@ -122,6 +122,8 @@
       bitwarden-desktop
       proton-vpn
     ];
+
+    hardware.bluetooth.enable = true;
     
     # Trash
     services.gvfs.enable = true;
