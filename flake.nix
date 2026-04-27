@@ -13,6 +13,8 @@
 
     millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
 
+    distro-grub-themes.url = "github:AdisonCavani/distro-grub-themes";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

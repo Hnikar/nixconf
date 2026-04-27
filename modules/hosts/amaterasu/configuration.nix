@@ -4,7 +4,7 @@
     imports = [
       self.nixosModules.hostAmaterasuHardware
 
-      self.nixosModules.plymouth
+      #self.nixosModules.plymouth
 
       self.nixosModules.niri
       
@@ -20,9 +20,17 @@
     ];
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
-	
-    boot.loader.systemd-boot.enable = true;
+
+    # Bootloader
     boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.efi.efiSysMountPoint = "/boot";
+    boot.loader.systemd-boot.enable = false;
+    boot.loader.grub = {
+            enable = true;
+            efiSupport = true;
+            device = "nodev";
+    };
+    boot.loader.grub.theme = inputs.distro-grub-themes.packages.x86_64-linux.nixos-grub-theme;
   
     networking.hostName = "Amaterasu";
   
@@ -104,7 +112,7 @@
       onlyoffice-desktopeditors
       foliate
       gnome-text-editor
-      butter
+      btrfs-assistant
 
       # Security Apps
       bitwarden-desktop
@@ -135,7 +143,5 @@
         defaultNetwork.settings.dns_enabled = true; # Required for containers under podman-compose to be able to talk to each other.
       };
     };
-
   };
-
 }
