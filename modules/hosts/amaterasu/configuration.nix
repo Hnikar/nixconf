@@ -51,7 +51,7 @@
       packages = with pkgs; [];
     };
 
-        home-manager.users.izanagi = { pkgs, ... }: {
+    home-manager.users.izanagi = { pkgs, ... }: {
       # Clipboard manager
       services.cliphist.enable = true;
       
@@ -71,6 +71,7 @@
           package = pkgs.papirus-icon-theme;
         };
       };
+
     };
 
     nixpkgs.config.allowUnfree = true;
@@ -86,6 +87,10 @@
       # Utilities
       baobab
       gnome-disk-utility
+      file-roller
+      zip
+      libsecret
+      unrar
 
       # Containers
       distrobox
@@ -98,11 +103,16 @@
       joplin-desktop
       onlyoffice-desktopeditors
       foliate
+      gnome-text-editor
+      butter
 
       # Security Apps
       bitwarden-desktop
       proton-vpn
     ];
+    
+    # Trash
+    services.gvfs.enable = true;
 
     services.udisks2.enable = true;
 
