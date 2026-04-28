@@ -115,6 +115,7 @@
         ],
         "right": [
           {
+            "defaultSettings": {},
             "id": "plugin:kde-connect"
           },
           {

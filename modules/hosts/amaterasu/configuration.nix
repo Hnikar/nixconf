@@ -142,13 +142,11 @@
     # Trash
     services.gvfs.enable = true;
 
+    security.polkit.enable = true;
+
     services.udisks2.enable = true;
 
     programs.kdeconnect.enable = true;
-
-    # Keyring
-    services.gnome.gnome-keyring.enable = true;
-    security.pam.services.gdm.enableGnomeKeyring = true;
 
     environment.variables.EDITOR = "nvim";
 
