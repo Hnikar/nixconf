@@ -144,6 +144,7 @@
           #  Layout & Window Modes
           "Mod+F".maximize-column = {};
           "Mod+Shift+F".fullscreen-window = {};
+          "Mod+M".maximize-window-to-edges = {};
           "Mod+C".center-column = {};
           "Mod+Minus".set-column-width = "-10%"; ## хз 25 или 10
           "Mod+Equal".set-column-width = "+10%";
