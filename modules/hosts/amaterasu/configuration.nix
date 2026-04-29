@@ -126,6 +126,7 @@
       foliate
       mumble
       prismlauncher
+      obs-studio
 
       # GNOME apps
       gnome-text-editor
@@ -136,7 +137,8 @@
       showtime
       snapshot
       decibels
-      gradia
+      gnome-boxes
+      
 
       # Security Apps
       bitwarden-desktop
