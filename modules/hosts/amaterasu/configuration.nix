@@ -16,6 +16,7 @@
       self.nixosModules.niri
       self.nixosModules.noctalia
       self.nixosModules.homeManager
+      self.nixosModules.keyring
 
       # Desktop applications & helpers
       self.nixosModules.discord
@@ -110,6 +111,7 @@
       unrar
       kdePackages.qt6ct
       btrfs-assistant
+      openssh
 
       # Containers
       distrobox
@@ -122,7 +124,19 @@
       joplin-desktop
       onlyoffice-desktopeditors
       foliate
+      mumble
+      prismlauncher
+
+      # GNOME apps
       gnome-text-editor
+      showtime
+      gnome-calculator
+      loupe
+      papers
+      showtime
+      snapshot
+      decibels
+      gradia
 
       # Security Apps
       bitwarden-desktop
@@ -131,6 +145,9 @@
 
 
     # Services and miscellaneous system settings
+
+    ## Tailscale
+    services.tailscale.enable = true;
 
     ## Trash / file handling
     services.gvfs.enable = true;
