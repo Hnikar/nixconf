@@ -16,7 +16,7 @@
           }
         ];
         states = {
-          clipper = {
+          clipboard = {
             enabled = true;
             sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
           };

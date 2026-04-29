@@ -111,13 +111,13 @@
             "textColor": "none",
             "useFixedWidth": false,
             "visualizerType": "linear"
-          }
-        ],
-        "right": [
+          },
           {
             "defaultSettings": {},
             "id": "plugin:kde-connect"
-          },
+          }
+        ],
+        "right": [
           {
             "blacklist": [],
             "chevronColor": "none",
@@ -129,21 +129,11 @@
           },
           {
             "defaultSettings": {
-              "autoPaste": false,
-              "autoPasteDelay": 300,
-              "autoPasteOnRightClick": false,
-              "cardColors": {},
-              "customColors": {},
-              "enableTodoIntegration": false,
-              "fullscreenMode": false,
-              "hidePanelBackground": false,
-              "notecardsEnabled": true,
-              "panelHeight": 0,
-              "panelWidth": 1450,
-              "pincardsEnabled": true,
-              "showCloseButton": true
+              "density": "comfortable",
+              "maxHistorySize": 100,
+              "showImagePreviews": true
             },
-            "id": "plugin:clipper"
+            "id": "plugin:clipboard"
           },
           {
             "displayMode": "forceOpen",
