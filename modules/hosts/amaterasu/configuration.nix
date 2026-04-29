@@ -4,6 +4,8 @@
     imports = [
       self.nixosModules.hostAmaterasuHardware
 
+      self.nixosModules.features.grub
+
       #self.nixosModules.plymouth
 
       self.nixosModules.niri
@@ -22,18 +24,6 @@
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-    # Bootloader
-    boot.loader.efi.canTouchEfiVariables = true;
-    boot.loader.efi.efiSysMountPoint = "/boot";
-    boot.loader.systemd-boot.enable = false;
-    boot.loader.grub = rec {
-      enable = true;
-      efiSupport = true;
-      device = "nodev";
-
-      theme = inputs.distro-grub-themes.packages.x86_64-linux.nixos-grub-theme;
-      splashImage = "${theme}/splash_image.jpg";
-    };
     time.hardwareClockInLocalTime = true;
   
     networking.hostName = "Amaterasu";
