@@ -146,7 +146,7 @@
     ## Display manager
     services.displayManager.gdm.enable = true;
 
-    ## Editor preference and Qt theme
+    ## Environment variables
     environment.variables.EDITOR = "nvim";
     environment.variables.QT_QPA_PLATFORMTHEME = "qt6ct";
 
