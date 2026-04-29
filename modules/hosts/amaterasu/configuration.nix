@@ -4,7 +4,7 @@
     imports = [
       self.nixosModules.hostAmaterasuHardware
 
-      self.nixosModules.features.grub
+      self.nixosModules.grub
 
       #self.nixosModules.plymouth
 
