@@ -7,6 +7,7 @@
       #self.nixosModules.plymouth
 
       self.nixosModules.niri
+      self.nixosModules.noctalia
       
       self.nixosModules.homeManager
 
@@ -122,6 +123,11 @@
       bitwarden-desktop
       proton-vpn
     ];
+
+  #   environment.pathsToLink = [ 
+  #   "/share/applications" 
+  #   "/share/xdg-desktop-portal" 
+  # ];
 
     hardware.bluetooth = {
       enable = true;

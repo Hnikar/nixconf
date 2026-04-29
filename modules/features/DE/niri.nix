@@ -13,7 +13,7 @@
       
       settings = {
         spawn-at-startup = [
-          (lib.getExe self'.packages.myNoctalia)
+          (lib.getExe pkgs.noctalia-shell)
         ];
         xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
 
@@ -66,9 +66,9 @@
 
 
           # Core
-          "Mod+S".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call launcher toggle";
-          "Mod+Space".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call controlCenter toggle";
-          "Mod+Comma".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call settings toggle";
+          "Mod+S".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call launcher toggle";
+          "Mod+Space".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call controlCenter toggle";
+          "Mod+Comma".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call settings toggle";
           "Mod+Q".close-window = {};
 
 
@@ -194,10 +194,10 @@
 
 
           # Media
-          "XF86AudioRaiseVolume".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume increase";
-          "XF86AudioLowerVolume".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume decrease";
-          "XF86AudioMute".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume muteOutput";
-          "XF86AudioMicMute".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call volume micmute";
+          "XF86AudioRaiseVolume".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume increase";
+          "XF86AudioLowerVolume".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume decrease";
+          "XF86AudioMute".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume muteOutput";
+          "XF86AudioMicMute".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume micmute";
           
           # Media Player Controls
           "XF86AudioPlay".spawn-sh = "${lib.getExe pkgs.playerctl} play-pause";
@@ -205,8 +205,8 @@
           "XF86AudioPrev".spawn-sh = "${lib.getExe pkgs.playerctl} previous";
          
           # Brightness
-          #"XF86MonBrightnessUp".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call brightness increase";
-          #"XF86MonBrightnessDown".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call brightness decrease";
+          #"XF86MonBrightnessUp".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call brightness increase";
+          #"XF86MonBrightnessDown".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call brightness decrease";
         };
       };
     };
