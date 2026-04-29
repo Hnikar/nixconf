@@ -124,11 +124,6 @@
       proton-vpn
     ];
 
-  #   environment.pathsToLink = [ 
-  #   "/share/applications" 
-  #   "/share/xdg-desktop-portal" 
-  # ];
-
     hardware.bluetooth = {
       enable = true;
       powerOnBoot = true;
