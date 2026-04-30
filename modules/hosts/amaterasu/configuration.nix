@@ -27,6 +27,7 @@
       self.nixosModules.spicetify
       self.nixosModules.kitty
       self.nixosModules.podman
+      self.nixosModules.razer
     ];
 
 
