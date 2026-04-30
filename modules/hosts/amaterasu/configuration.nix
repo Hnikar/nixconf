@@ -33,10 +33,7 @@
     # Nix and system basics
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-    ## Keep hardware clock consistent with other OSes
-    time.hardwareClockInLocalTime = true;
-
-    time.timeZone = "Europe/Warsaw";
+    time.timeZone = "UTC";
 
     networking.hostName = "Amaterasu";
     networking.networkmanager.enable = true;
