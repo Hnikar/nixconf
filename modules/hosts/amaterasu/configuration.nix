@@ -110,6 +110,7 @@
       kdePackages.qt6ct
       btrfs-assistant
       openssh
+      headsetcontrol
 
       # Containers
       distrobox
