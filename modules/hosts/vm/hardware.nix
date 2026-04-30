@@ -2,29 +2,25 @@
 
   flake.nixosModules.hostAmaterasuHardware = { config, lib, pkgs, modulesPath, ... }: {
 
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
-
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "ata_piix" "mptspi" "uhci_hcd" "ehci_pci" "ahci" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/b03fa557-35b2-4020-a2e9-83dd046d11cd";
+    { device = "/dev/disk/by-uuid/bdc96ac4-7828-4a7a-8315-3858182be5db";
       fsType = "btrfs";
       options = [ "subvol=@" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/b03fa557-35b2-4020-a2e9-83dd046d11cd";
+    { device = "/dev/disk/by-uuid/bdc96ac4-7828-4a7a-8315-3858182be5db";
       fsType = "btrfs";
       options = [ "subvol=@home" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/6971-79F7";
+    { device = "/dev/disk/by-uuid/24ED-A8BB";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
@@ -32,7 +28,6 @@
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   };
 
 }
