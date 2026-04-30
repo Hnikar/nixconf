@@ -12,6 +12,12 @@
       # v2-settings = true;
       
       settings = {
+
+        # outputs."DP-1" = {
+        #   mode = "2560x1440@164.999";
+        #   variable-refresh-rate = true;
+        # };
+
         spawn-at-startup = [
           (lib.getExe pkgs.noctalia-shell)
         ];
@@ -52,7 +58,15 @@
             default-column-width { proportion 0.25; }
             default-window-height { proportion 0.25; }
           };
+          output "DP-1" {
+            // Set the exact resolution and refresh rate from your available modes
+            mode "2560x1440@164.999"
+    
+            // Enable Variable Refresh Rate (FreeSync/G-Sync)
+            // variable-refresh-rate true
+}          ;
         '';
+        
 
         binds = {
           # Terminal
