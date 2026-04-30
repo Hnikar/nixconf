@@ -169,7 +169,7 @@
     environment.variables.QT_QPA_PLATFORMTHEME = "qt6ct";
 
     ## Virtualisation
-    virtualisation.vmware.guest.enable = true;
+    #virtualisation.vmware.guest.enable = true;
 
 
     # Keep this synced with your NixOS version
