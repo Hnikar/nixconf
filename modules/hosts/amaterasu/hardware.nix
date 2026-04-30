@@ -29,6 +29,12 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
+  fileSystems."/var/mnt/linssd" =
+    { device = "/dev/disk/by-uuid/377310d0-b604-47d5-a126-e18350b27ca5";
+      fsType = "btrfs";
+      options = ["nosuid,nodev,nofail,x-gvfs-show"];
+    };
+
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
