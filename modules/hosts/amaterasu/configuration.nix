@@ -34,10 +34,16 @@
     # Nix and system basics
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-    time.timeZone = "UTC";
+    #time.timeZone = "Europe/Warsaw"; 
+    time.timeZone = "UTC"; 
 
     networking.hostName = "Amaterasu";
     networking.networkmanager.enable = true;
+
+    networking.interfaces."enp8s0".ipv4.addresses = [{
+      address = "192.168.69.2";
+      prefixLength = 24;
+    }];
 
 
     # Localization
@@ -92,7 +98,7 @@
 
     nixpkgs.config.allowUnfree = true;
 
-    environment.systemPackages = with pkgs; [
+    environment.systemPackages = with pkgs; [su
       # CLI
       wget
       fastfetch
@@ -126,6 +132,7 @@
       mumble
       prismlauncher
       obs-studio
+      qbittorrent
 
       # GNOME apps
       gnome-text-editor
@@ -143,7 +150,6 @@
       bitwarden-desktop
       proton-vpn
     ];
-
 
     # Services and miscellaneous system settings
 
