@@ -13,8 +13,6 @@
 
     millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
 
-    ghostty.url = "github:clo4/ghostty-hm-module";
-
     distro-grub-themes.url = "github:AdisonCavani/distro-grub-themes";
 
     noctalia = {
