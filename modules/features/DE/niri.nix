@@ -259,6 +259,7 @@
           "Mod+Shift+Escape".show-hotkey-overlay = {};
           #"Mod+Shift+P".power-off-monitors = {};
           "Ctrl+Alt+Delete".quit = {};
+          "Super+Shift+Q".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call sessionMenu toggle"; 
 
 
           # Media
