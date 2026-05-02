@@ -30,6 +30,8 @@
           ''))
           "spotify"
           (lib.getExe pkgs.vesktop)
+          (lib.getExe pkgs.telegram-desktop)
+          (lib.getExe pkgs.cinny-desktop)
         ];
         xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
 
@@ -93,6 +95,16 @@
 
           window-rule {
             match app-id="vesktop"
+            open-on-workspace "social"
+            open-maximized true
+          };
+          window-rule {
+            match app-id="telegram-desktop"
+            open-on-workspace "social"
+            open-maximized true
+          };
+          window-rule {
+            match app-id="cinny-desktop"
             open-on-workspace "social"
             open-maximized true
           };
