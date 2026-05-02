@@ -11,10 +11,9 @@
   home-manager.users.${username} = {
    programs.ghostty = {
     enable = true;
-    shellIntegration.enableFishIntegration = true;
+    enableFishIntegration = true;
     settings = {
-        enable_audio_bell = "no";
-        font_family = "JetBrainsMono Nerd Font";
+        font-family = "JetBrainsMono Nerd Font";
     };
   };
    
