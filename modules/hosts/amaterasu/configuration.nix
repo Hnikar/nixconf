@@ -135,6 +135,8 @@
       prismlauncher
       obs-studio
       qbittorrent
+      telegram-desktop
+      cinny-desktop
 
       # GNOME apps
       gnome-text-editor
