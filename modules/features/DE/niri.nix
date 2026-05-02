@@ -255,8 +255,8 @@
 
 
           # Scroll Navigation
-          "Mod+Ctrl+WheelScrollDown".focus-column-left = {};
-          "Mod+Ctrl+WheelScrollUp".focus-column-right = {};
+          "Mod+Shift+WheelScrollDown".focus-column-left = {};
+          "Mod+Shift+WheelScrollUp".focus-column-right = {};
           "Mod+WheelScrollDown".focus-workspace-down = {};
           "Mod+WheelScrollUp".focus-workspace-up = {};
 
