@@ -20,6 +20,9 @@
 
         spawn-at-startup = [
           (lib.getExe pkgs.noctalia-shell)
+          (lib.getExe pkgs.brave)
+          (lib.getExe pkgs.spotify)
+          (lib.getExe pkgs.vesktop)
         ];
         xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
 
@@ -37,6 +40,18 @@
         layout.focus-ring = {
           width = 2;
           active-color = "#fe8019";
+        };
+        
+        workspaces = {
+          "web" = { 
+            open-on-output = "DP-1"; 
+          };
+          "social" = { 
+            open-on-output = "DP-3"; 
+          };
+          "music" = { 
+            open-on-output = "DP-3"; 
+          };
         };
 
         prefer-no-csd = true;
@@ -58,6 +73,25 @@
             default-column-width { proportion 0.25; }
             default-window-height { proportion 0.25; }
           };
+
+          window-rule {
+            match app-id="brave"
+            open-on-workspace "web"
+            open-maximized true
+          };
+
+          window-rule {
+            match app-id="discord"
+            open-on-workspace "social"
+            open-maximized true
+          };
+
+          window-rule {
+            match app-id="spotify"
+            open-on-workspace "music"
+            open-maximized true
+          };
+
           output "DP-1" {
             // Set the exact resolution and refresh rate from your available modes
             mode "2560x1440@164.999"
@@ -66,7 +100,7 @@
             // variable-refresh-rate true
           };
           recent-windows {
-          // Pre-select the "Output" scope when switching windows.
+          // Pre-select the "Output" scope when switching windows.i
           binds {
             Alt+Tab         { next-window     scope="workspace"; }
             Alt+Shift+Tab   { previous-window scope="workspace"; }
