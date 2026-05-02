@@ -53,7 +53,7 @@
           "labelMode": "name",
           "occupiedColor": "secondary",
           "pillSize": 0.6,
-          "showApplications": true,
+          "showApplications": false,
           "showApplicationsHover": false,
           "showBadge": true,
           "showLabelsOnlyWhenOccupied": true,
