@@ -64,7 +64,16 @@
     
             // Enable Variable Refresh Rate (FreeSync/G-Sync)
             // variable-refresh-rate true
-}          ;
+          };
+          recent-windows {
+          // Pre-select the "Output" scope when switching windows.
+          binds {
+            Alt+Tab         { next-window     scope="workspace"; }
+            Alt+Shift+Tab   { previous-window scope="workspace"; }
+            Alt+grave       { next-window     scope="output"; }
+            Alt+Shift+grave { previous-window scope="output"; }
+          }
+}
         '';
         
 
