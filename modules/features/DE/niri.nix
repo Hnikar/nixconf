@@ -136,8 +136,8 @@
 
         binds = {
           # Terminal
-          #"Mod+Return".spawn-sh = lib.getExe pkgs.ghostty;
-          "Mod+Return".spawn-sh = lib.getExe pkgs.kitty;
+          "Mod+Return".spawn-sh = lib.getExe pkgs.ghostty;
+          #"Mod+Return".spawn-sh = lib.getExe pkgs.kitty;
 
 
           # Apps

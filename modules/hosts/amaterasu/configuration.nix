@@ -27,7 +27,10 @@
       self.nixosModules.git
       self.nixosModules.fish
       self.nixosModules.spicetify
-      self.nixosModules.kitty
+
+      #self.nixosModules.kitty
+      self.nixosModules.ghostty
+
       self.nixosModules.podman
       self.nixosModules.razer
     ];
@@ -113,6 +116,7 @@
       btop
       yazi
       neovim
+      ghostty
 
       # Utilities
       baobab
@@ -129,6 +133,7 @@
       # Containers
       distrobox
       distroshelf
+      
 
       # Apps
       brave
