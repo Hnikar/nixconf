@@ -39,7 +39,7 @@
           "useDistroLogo": false
         },
         {
-          "characterCount": 2,
+          "characterCount": 3,
           "colorizeIcons": true,
           "emptyColor": "secondary",
           "enableScrollWheel": true,
@@ -50,7 +50,7 @@
           "hideUnoccupied": false,
           "iconScale": 0.8,
           "id": "Workspace",
-          "labelMode": "none",
+          "labelMode": "name",
           "occupiedColor": "secondary",
           "pillSize": 0.6,
           "showApplications": true,

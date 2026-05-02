@@ -12,16 +12,23 @@
       # v2-settings = true;
       
       settings = {
-
-        # outputs."DP-1" = {
-        #   mode = "2560x1440@164.999";
-        #   variable-refresh-rate = true;
-        # };
-
         spawn-at-startup = [
           (lib.getExe pkgs.noctalia-shell)
-          (lib.getExe pkgs.brave)
-          (lib.getExe pkgs.spotify)
+          (lib.getExe (pkgs.writeShellScriptBin "brave-smart-delay" ''
+            # Loop until the notification service is claimed on D-Bus (max 10 seconds to prevent infinite hangs)
+            count=0
+            while ! busctl --user status org.freedesktop.Notifications >/dev/null 2>&1; do
+              if [ $count -ge 20 ]; then 
+                break # Give up after 10 seconds and just launch anyway
+              fi
+              sleep 0.5
+              count=$((count+1))
+            done
+            
+            # Force Brave to use system notifications via feature flags
+            exec ${lib.getExe pkgs.brave} --enable-features=SystemNotifications
+          ''))
+          "spotify"
           (lib.getExe pkgs.vesktop)
         ];
         xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
@@ -75,13 +82,17 @@
           };
 
           window-rule {
-            match app-id="brave"
+            match app-id="brave-browser"
             open-on-workspace "web"
             open-maximized true
           };
+          window-rule {
+            match app-id="brave-browser" title="^Brave$|^Notification$"
+            open-maximized false
+          };
 
           window-rule {
-            match app-id="discord"
+            match app-id="vesktop"
             open-on-workspace "social"
             open-maximized true
           };

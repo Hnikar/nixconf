@@ -100,7 +100,7 @@
 
     nixpkgs.config.allowUnfree = true;
 
-    environment.systemPackages = with pkgs; [su
+    environment.systemPackages = with pkgs; [
       # CLI
       wget
       fastfetch
