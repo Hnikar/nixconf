@@ -10,7 +10,7 @@
         profiles.default.extensions = (with pkgs.vscode-extensions; [
           ms-azuretools.vscode-containers
           esbenp.prettier-vscode
-          asvetliakov.vscode-neovim
+          vscodevim.vim
           
           ms-vscode-remote.remote-containers
           github.copilot-chat
