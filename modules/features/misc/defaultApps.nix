@@ -1,6 +1,6 @@
 { self, inputs, ... }: 
 {
-  flake.nixosModules.defaultApps = { pkgs, username ... }: {
+  flake.nixosModules.defaultApps = { pkgs, username, ... }: {
     home-manager.users.${username} = {
       xdg.mimeApps = {
       enable = true;

@@ -9,6 +9,8 @@
       # Hardware services
       self.nixosModules.bluetooth
 
+      self.nixosModules.defaultApps
+
       # Optional UI boot theme (disabled)
       #self.nixosModules.plymouth
 
