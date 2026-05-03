@@ -104,7 +104,6 @@
       };
     };
 
-
     # System packages
 
     nixpkgs.config.allowUnfree = true;
@@ -127,7 +126,6 @@
       unrar
       kdePackages.qt6ct
       btrfs-assistant
-      openssh
       headsetcontrol
 
       # Containers
