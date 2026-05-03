@@ -104,6 +104,10 @@
           gtk-application-prefer-dark-theme = 1;
         };
       };
+      home.sessionVariables = {
+        QT_QPA_PLATFORMTHEME = "gtk3";
+        QS_ICON_THEME = "Gruvbox-Plus-Dark"; 
+      };
     };
 
     # System packages
