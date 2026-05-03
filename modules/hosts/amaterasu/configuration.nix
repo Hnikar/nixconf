@@ -148,6 +148,8 @@
       qbittorrent
       telegram-desktop
       cinny-desktop
+      osu-lazer-bin
+      
 
       # GNOME apps
       gnome-text-editor
