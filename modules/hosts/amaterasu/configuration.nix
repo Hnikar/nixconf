@@ -14,6 +14,8 @@
       # Optional UI boot theme (disabled)
       #self.nixosModules.plymouth
 
+      self.nixosModules.openTabletDriver
+
       # Desktop / UI
       self.nixosModules.niri
       self.nixosModules.noctalia
