@@ -8,14 +8,12 @@
 
   perSystem = { pkgs, lib, self', ... }: {
     packages.myNiri = inputs.wrapper-modules.wrappers.niri.wrap {
-      inherit pkgs; # THIS PART IS VERY IMPORTAINT, I FORGOT IT IN THE VIDEO!!!
-      # v2-settings = true;
+      inherit pkgs;
       
       settings = {
         spawn-at-startup = [
           (lib.getExe pkgs.noctalia-shell)
           (lib.getExe (pkgs.writeShellScriptBin "brave-smart-delay" ''
-            # Loop until the notification service is claimed on D-Bus (max 10 seconds to prevent infinite hangs)
             count=0
             while ! busctl --user status org.freedesktop.Notifications >/dev/null 2>&1; do
               if [ $count -ge 20 ]; then 
@@ -25,11 +23,13 @@
               count=$((count+1))
             done
             
-            # Force Brave to use system notifications via feature flags
-            exec ${lib.getExe pkgs.brave} --enable-features=SystemNotifications
+            exec ${lib.getExe pkgs.brave}
           ''))
           "spotify"
-          (lib.getExe pkgs.vesktop)
+          (lib.getExe (pkgs.writeShellScriptBin "vesktop-delay" ''
+            sleep 3
+            exec ${lib.getExe pkgs.vesktop}
+          ''))
           (lib.getExe pkgs.telegram-desktop)
           (lib.getExe pkgs.cinny-desktop)
         ];
