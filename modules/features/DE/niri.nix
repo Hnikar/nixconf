@@ -51,21 +51,20 @@
           active-color = "#fe8019";
         };
         
-        workspaces = {
-          "web" = { 
-            open-on-output = "DP-1"; 
-          };
-          "social" = { 
-            open-on-output = "DP-3"; 
-          };
-          "music" = { 
-            open-on-output = "DP-3"; 
-          };
-        };
+
 
         prefer-no-csd = true;
         # Steam Notification Fix
         extraConfig = ''
+        workspace "web" { 
+          open-on-output "DP-1" 
+        };
+        workspace "social" { 
+          open-on-output "DP-3" 
+        };
+        workspace "music" { 
+          open-on-output "DP-3" 
+        };
           window-rule {
             match app-id="steam" title="^notificationtoasts_\\d+_desktop$"
             default-floating-position x=10 y=10 relative-to="bottom-right"
@@ -99,12 +98,12 @@
             open-maximized true
           };
           window-rule {
-            match app-id="telegram-desktop"
+            match app-id="org.telegram.desktop"
             open-on-workspace "social"
             open-maximized true
           };
           window-rule {
-            match app-id="cinny-desktop"
+            match app-id="cinny"
             open-on-workspace "social"
             open-maximized true
           };
