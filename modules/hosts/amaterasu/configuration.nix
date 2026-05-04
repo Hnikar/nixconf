@@ -41,8 +41,8 @@
     # Nix and system basics
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-    #time.timeZone = "Europe/Warsaw"; 
-    time.timeZone = "UTC"; 
+    time.timeZone = "Europe/Warsaw"; 
+    #time.timeZone = "UTC"; 
 
     networking.hostName = "Amaterasu";
     networking.networkmanager.enable = true;
@@ -133,6 +133,7 @@
       kdePackages.qt6ct
       btrfs-assistant
       headsetcontrol
+      
 
       # Containers
       distrobox
@@ -171,6 +172,11 @@
       bitwarden-desktop
       proton-vpn
     ];
+    fonts.packages = with pkgs; [
+  noto-fonts
+  noto-fonts-cjk-sans
+  noto-fonts-color-emoji
+];
 
     # Services and miscellaneous system settings
 
