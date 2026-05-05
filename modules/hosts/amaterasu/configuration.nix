@@ -30,7 +30,6 @@
       self.nixosModules.fish
       self.nixosModules.spicetify
 
-      #self.nixosModules.kitty
       self.nixosModules.ghostty
 
       self.nixosModules.podman
@@ -118,45 +117,51 @@
     nixpkgs.config.allowUnfree = true;
 
     environment.systemPackages = with pkgs; [
-      # CLI
-      wget
-      fastfetch
-      btop
-      yazi
-      neovim
-      ghostty
 
-      # Utilities
-      file-roller
-      zip
-      libsecret
-      unrar
-      kdePackages.qt6ct
+      brave
+
+      # Terminal & Shell
+      btop
+      fastfetch
+      ghostty
+      neovim
+      yazi
+
+      # System Utilities
       btrfs-assistant
+      file-roller
       headsetcontrol
+      kdePackages.qt6ct
+      libsecret
       nextcloud-client
-      
+      unrar
+      wget
+      zip
 
       # Containers
       distrobox
       distroshelf
+
       
 
-      # Apps
-      brave
-      signal-desktop
-      joplin-desktop
-      onlyoffice-desktopeditors
-      foliate
-      mumble
-      prismlauncher
-      obs-studio
-      qbittorrent
-      telegram-desktop
+      # Communication
       cinny-desktop
-      osu-lazer-bin      
+      signal-desktop
+      telegram-desktop
+      mumble
 
-      # Security Apps
+      # Media & Entertainment
+      foliate
+      joplin-desktop
+      obs-studio
+      osu-lazer-bin
+      prismlauncher
+
+      # Productivity
+      onlyoffice-desktopeditors
+      qbittorrent
+
+      # Security
       bitwarden-desktop
       proton-vpn
     ];
@@ -185,9 +190,6 @@
     ## Environment variables
     environment.variables.EDITOR = "nvim";
     environment.variables.QT_QPA_PLATFORMTHEME = "qt6ct";
-
-    ## Virtualisation
-    #virtualisation.vmware.guest.enable = true;
 
 
     # Keep this synced with your NixOS version
