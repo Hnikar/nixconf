@@ -33,6 +33,7 @@
       self.nixosModules.ghostty
 
       self.nixosModules.containerTools
+      self.nixosModules.communicationApps
       self.nixosModules.razer
       self.nixosModules.fonts
 
@@ -137,12 +138,6 @@
       unrar
       wget
       zip
-
-      # Communication
-      cinny-desktop
-      signal-desktop
-      telegram-desktop
-      mumble
 
       # Media & Entertainment
       foliate
