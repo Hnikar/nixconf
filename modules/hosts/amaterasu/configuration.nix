@@ -41,12 +41,7 @@
       self.nixosModules.gnomeSuite
     ];
 
-
-    # Nix and system basics
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-    time.timeZone = "Europe/Warsaw"; 
-
+    # Networking
     networking.hostName = "Amaterasu";
     networking.networkmanager.enable = true;
 
@@ -55,8 +50,11 @@
       prefixLength = 24;
     }];
 
+    services.tailscale.enable = true;
+
 
     # Localization
+    time.timeZone = "Europe/Warsaw"; 
     i18n.defaultLocale = "en_US.UTF-8";
     i18n.extraLocaleSettings = {
       LC_ADDRESS = "en_US.UTF-8";
@@ -80,7 +78,11 @@
     };
 
 
-    # Home Manager (per-user UI / services)
+    # Display manager 
+    services.displayManager.gdm.enable = true;
+
+
+    # Home Manager
     home-manager.users.izanagi = { pkgs, ... }: {
       ## Clipboard manager
       services.cliphist.enable = true;
@@ -113,12 +115,11 @@
       };
     };
 
+
     # System packages
-
     nixpkgs.config.allowUnfree = true;
-
     environment.systemPackages = with pkgs; [
-
+      # Web browser
       brave
 
       # Terminal & Shell
@@ -156,32 +157,18 @@
     ];
 
 
-    # Services and miscellaneous system settings
-
-    ## Tailscale
-    services.tailscale.enable = true;
-
-    ## Trash / file handling
+    # Misc services 
     services.gvfs.enable = true;
-
-    ## polkit for privilege management
     security.polkit.enable = true;
-
-    ## Disk management
     services.udisks2.enable = true;
 
-    ## KDE Connect
-    programs.kdeconnect.enable = true;
-
-    ## Display manager
-    services.displayManager.gdm.enable = true;
 
     ## Environment variables
     environment.variables.EDITOR = "nvim";
     environment.variables.QT_QPA_PLATFORMTHEME = "qt6ct";
 
-
-    # Keep this synced with your NixOS version
+    # Nix and system
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
     system.stateVersion = "25.11";
   };
 }
