@@ -36,6 +36,9 @@
       self.nixosModules.podman
       self.nixosModules.razer
       self.nixosModules.fonts
+
+
+      self.nixosModules.gnomeSuite
     ];
 
 
@@ -43,7 +46,6 @@
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
     time.timeZone = "Europe/Warsaw"; 
-    #time.timeZone = "UTC"; 
 
     networking.hostName = "Amaterasu";
     networking.networkmanager.enable = true;
@@ -125,8 +127,6 @@
       ghostty
 
       # Utilities
-      baobab
-      gnome-disk-utility
       file-roller
       zip
       libsecret
@@ -144,7 +144,6 @@
 
       # Apps
       brave
-      nautilus
       signal-desktop
       joplin-desktop
       onlyoffice-desktopeditors
@@ -155,21 +154,7 @@
       qbittorrent
       telegram-desktop
       cinny-desktop
-      osu-lazer-bin
-      
-
-      # GNOME apps
-      gnome-text-editor
-      showtime
-      gnome-calculator
-      loupe
-      papers
-      showtime
-      snapshot
-      decibels
-      gnome-boxes
-      pika-backup
-      
+      osu-lazer-bin      
 
       # Security Apps
       bitwarden-desktop
