@@ -12,7 +12,6 @@
       self.nixosModules.git
       self.nixosModules.keyring
       self.nixosModules.openTabletDriver
-      self.nixosModules.podman
       self.nixosModules.containerTools
       self.nixosModules.razer
 
