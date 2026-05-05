@@ -1,6 +1,10 @@
 { self, inputs, ... }: 
 {
-  flake.nixosModules.podman = { pkgs, ... }: {
+  flake.nixosModules.containerTools = { pkgs, ... }: {
+   environment.systemPackages = with pkgs; [
+      distrobox
+      distroshelf
+   ];
     virtualisation = {
     containers.enable = true;
       podman = {

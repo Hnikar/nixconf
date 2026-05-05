@@ -32,7 +32,7 @@
 
       self.nixosModules.ghostty
 
-      self.nixosModules.podman
+      self.nixosModules.containerTools
       self.nixosModules.razer
       self.nixosModules.fonts
 
@@ -137,12 +137,6 @@
       unrar
       wget
       zip
-
-      # Containers
-      distrobox
-      distroshelf
-
-      
 
       # Communication
       cinny-desktop
