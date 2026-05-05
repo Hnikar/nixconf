@@ -167,6 +167,7 @@
       snapshot
       decibels
       gnome-boxes
+      pika-backup
       
 
       # Security Apps
