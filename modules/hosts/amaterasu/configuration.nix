@@ -6,39 +6,38 @@
       self.nixosModules.hostAmaterasuHardware
       self.nixosModules.grub
 
-      # Hardware services
+      # Services and hardware helpers
       self.nixosModules.bluetooth
-
-      self.nixosModules.defaultApps
-
-      # Optional UI boot theme (disabled)
-      #self.nixosModules.plymouth
-
+      self.nixosModules.fish
+      self.nixosModules.git
+      self.nixosModules.keyring
       self.nixosModules.openTabletDriver
+      self.nixosModules.podman
+      self.nixosModules.containerTools
+      self.nixosModules.razer
 
       # Desktop / UI
       self.nixosModules.niri
       self.nixosModules.noctalia
+      
+      # User / Home Manager
       self.nixosModules.homeManager
-      self.nixosModules.keyring
-
-      # Desktop applications & helpers
-      self.nixosModules.discord
-      self.nixosModules.vscode
-      self.nixosModules.steam
-      self.nixosModules.git
-      self.nixosModules.fish
-      self.nixosModules.spicetify
-
-      self.nixosModules.ghostty
-
-      self.nixosModules.containerTools
-      self.nixosModules.communicationApps
-      self.nixosModules.razer
+      self.nixosModules.defaultApps
+      
       self.nixosModules.fonts
 
-
+      # Desktop applications 
+      self.nixosModules.discord
+      self.nixosModules.ghostty
+      self.nixosModules.spicetify
+      self.nixosModules.steam
+      self.nixosModules.vscode
+      ## App Suites
+      self.nixosModules.communicationApps
       self.nixosModules.gnomeSuite
+
+      # Misc
+      # self.nixosModules.plymouth
     ];
 
     # Networking
