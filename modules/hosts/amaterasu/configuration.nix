@@ -133,6 +133,7 @@
       kdePackages.qt6ct
       btrfs-assistant
       headsetcontrol
+      nextcloud-client
       
 
       # Containers
