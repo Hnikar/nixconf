@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 {
-  flake.nixosModules.communication = { pkgs, ... }: {
+  flake.nixosModules.communicationApps = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       cinny-desktop
       mumble
