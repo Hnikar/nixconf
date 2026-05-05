@@ -35,6 +35,7 @@
 
       self.nixosModules.podman
       self.nixosModules.razer
+      self.nixosModules.fonts
     ];
 
 
@@ -174,11 +175,7 @@
       bitwarden-desktop
       proton-vpn
     ];
-    fonts.packages = with pkgs; [
-  noto-fonts
-  noto-fonts-cjk-sans
-  noto-fonts-color-emoji
-];
+
 
     # Services and miscellaneous system settings
 
