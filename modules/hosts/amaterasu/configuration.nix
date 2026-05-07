@@ -5,8 +5,8 @@
       # Hardware and boot
       self.nixosModules.hostAmaterasuHardware
       self.nixosModules.grub
-      self.nixosModules.limine
-      
+      #self.nixosModules.limine
+
       # Services and hardware helpers
       self.nixosModules.bluetooth
       self.nixosModules.fish
