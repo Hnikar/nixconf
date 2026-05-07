@@ -5,7 +5,8 @@
       # Hardware and boot
       self.nixosModules.hostAmaterasuHardware
       self.nixosModules.grub
-
+      self.nixosModules.limine
+      
       # Services and hardware helpers
       self.nixosModules.bluetooth
       self.nixosModules.fish
@@ -138,9 +139,10 @@
       wget
       zip
 
-      # Media & Entertainment
+      # Media
       foliate
       joplin-desktop
+      logseq
       obs-studio
       osu-lazer-bin
       prismlauncher
