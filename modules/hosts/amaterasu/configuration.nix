@@ -5,6 +5,7 @@
       # Hardware and boot
       self.nixosModules.hostAmaterasuHardware
       self.nixosModules.grub
+      self.nixosModules.plymouth
 
       # Services and hardware helpers
       self.nixosModules.bluetooth
@@ -34,9 +35,6 @@
       ## App Suites
       self.nixosModules.communicationApps
       self.nixosModules.gnomeSuite
-
-      # Misc
-      # self.nixosModules.plymouth
     ];
 
     # Networking
