@@ -4,8 +4,7 @@
     imports = [
       # Hardware and boot
       self.nixosModules.hostAmaterasuHardware
-      #self.nixosModules.grub
-      self.nixosModules.limine
+      self.nixosModules.grub
 
       # Services and hardware helpers
       self.nixosModules.bluetooth
