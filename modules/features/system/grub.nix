@@ -10,8 +10,8 @@
       device = "nodev";
       useOSProber = true;
 
-      theme = inputs.distro-grub-themes.packages.x86_64-linux.nixos-grub-theme;
-      splashImage = "${theme}/splash_image.jpg";
+      #theme = inputs.distro-grub-themes.packages.x86_64-linux.nixos-grub-theme;
+      #splashImage = "${theme}/splash_image.jpg";
     };
   };
 }

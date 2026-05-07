@@ -4,8 +4,8 @@
     imports = [
       # Hardware and boot
       self.nixosModules.hostAmaterasuHardware
-      self.nixosModules.grub
-      #self.nixosModules.limine
+      #self.nixosModules.grub
+      self.nixosModules.limine
 
       # Services and hardware helpers
       self.nixosModules.bluetooth
@@ -138,6 +138,7 @@
       unrar
       wget
       zip
+      efibootmgr
 
       # Media
       foliate

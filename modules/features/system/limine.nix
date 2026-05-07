@@ -4,14 +4,13 @@
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.efi.efiSysMountPoint = "/boot";
     boot.loader.systemd-boot.enable = false;
-    boot.loader.limine = rec {
+    boot.loader.limine = {
       enable = true;
       efiSupport = true;
-     # device = "nodev";
      extraEntries = ''
         /Windows
           protocol: efi
-          path: uuid(DACB-4082):/EFI/Microsoft/Boot/bootmgfw.efi
+          path: guid(12a25a8c-0bdf-4fdb-bfa8-5fa105171440):/EFI/Microsoft/Boot/bootmgfw.efi
       '';
       extraConfig = ''
         term_palette: 1e1e2e;f38ba8;a6e3a1;f9e2af;89b4fa;f5c2e7;94e2d5;cdd6f4
