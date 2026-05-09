@@ -15,6 +15,7 @@
       self.nixosModules.openTabletDriver
       self.nixosModules.containerTools
       self.nixosModules.razer
+      self.nixosModules.appimage
 
       # Desktop / UI
       self.nixosModules.niri
