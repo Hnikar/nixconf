@@ -16,6 +16,7 @@
       self.nixosModules.containerTools
       self.nixosModules.razer
       self.nixosModules.appimage
+      self.nixosModules.pipewire
 
       # Desktop / UI
       self.nixosModules.niri
