@@ -76,8 +76,8 @@
 
     # Display manager 
     services.displayManager.gdm.enable = true;
-    services.displayManager.autoLogin.enable = true;
-    services.displayManager.autoLogin.user = "izanagi";
+    #services.displayManager.autoLogin.enable = true;
+    #services.displayManager.autoLogin.user = "izanagi";
 
 
     # Home Manager
