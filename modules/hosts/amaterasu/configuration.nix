@@ -115,10 +115,20 @@
       };
 
       # Custom desktop entries for web apps
-      xdg.desktopEntries.foundry = {
-        name = "Foundry";
-        exec = "${lib.getExe pkgs.brave} --app=https://poltva.org/";
-      };
+      xdg.desktopEntries.foundry =
+        let
+          foundryIcon = builtins.tryEval (builtins.fetchurl {
+            url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/foundry-vtt.png";
+            sha256 = "sha256-2IKzYVHmJK4XDPmLxGIvKLnyRfYxbFwSOgQaDD8KEOU=";
+          });
+        in
+        {
+          name = "Foundry";
+          exec = "${lib.getExe pkgs.brave} --app=https://poltva.org/";
+        }
+        // lib.optionalAttrs foundryIcon.success {
+          icon = "${foundryIcon.value}";
+        };
     };
 
 
