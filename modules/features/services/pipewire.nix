@@ -6,7 +6,6 @@
       pavucontrol 
       qpwgraph
       decent-sampler
-      amsynth
     ];
     services.pipewire = {
       enable = true;
