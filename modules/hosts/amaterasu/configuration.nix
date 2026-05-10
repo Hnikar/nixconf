@@ -113,6 +113,12 @@
         QT_QPA_PLATFORMTHEME = "gtk3";
         QS_ICON_THEME = "Gruvbox-Plus-Dark"; 
       };
+
+      # Custom desktop entries for web apps
+      xdg.desktopEntries.foundry = {
+        name = "Foundry";
+        exec = "${lib.getExe pkgs.brave} --app=https://poltva.org/";
+      };
     };
 
 
@@ -157,6 +163,9 @@
       bitwarden-desktop
       proton-vpn
     ];
+
+    
+
 
 
     # Misc services 
