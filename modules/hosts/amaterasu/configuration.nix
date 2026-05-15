@@ -71,7 +71,7 @@
     users.users.izanagi = {
       isNormalUser = true;
       description = "Izanagi";
-      extraGroups = [ "networkmanager" "wheel" "podman" ];
+      extraGroups = [ "networkmanager" "wheel" "podman" "docker" ];
       packages = with pkgs; [];
     };
 
@@ -164,6 +164,8 @@
       obs-studio
       osu-lazer-bin
       prismlauncher
+      rimsort
+      nixfmt 
 
       # Productivity
       onlyoffice-desktopeditors

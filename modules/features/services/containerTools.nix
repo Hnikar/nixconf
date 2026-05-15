@@ -8,7 +8,10 @@
    ];
     virtualisation = {
       containers.enable = true;
-      docker.enable = true;
+      docker = {
+        enable = true;
+        storageDriver = "btrfs";
+      };
       podman = {
         enable = true;
         #dockerCompat = true;
