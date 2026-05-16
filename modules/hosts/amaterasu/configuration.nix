@@ -186,6 +186,7 @@
         bitwarden-desktop
         proton-vpn
       ];
+      xdg.terminal-exec.enable = true;
 
       # Misc services
       services.gvfs.enable = true;

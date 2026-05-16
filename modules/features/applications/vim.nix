@@ -3,9 +3,7 @@
   flake.nixosModules.vim =
     { pkgs, ... }:
     {
-      import = [
-        inputs.nvf.vim
-      ];
+      imports = [ inputs.nvf.nixosModules.default ];
       programs.nvf = {
         enable = true;
         # Your settings need to go into the settings attribute set
@@ -18,7 +16,5 @@
           };
         };
       };
-
     };
-
 }
