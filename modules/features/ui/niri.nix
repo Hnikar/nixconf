@@ -1,294 +1,293 @@
-{ self, inputs, ... }: {
-  flake.nixosModules.niri = { pkgs, lib, ... }: {
-    programs.niri = {
-      enable = true;
-      package = self.packages.${pkgs.stdenv.hostPlatform.system}.myNiri;
+{ self, inputs, ... }:
+{
+  flake.nixosModules.niri =
+    { pkgs, lib, ... }:
+    {
+      programs.niri = {
+        enable = true;
+        package = self.packages.${pkgs.stdenv.hostPlatform.system}.myNiri;
+      };
     };
-  };
 
-  perSystem = { pkgs, lib, self', ... }: {
-    packages.myNiri = inputs.wrapper-modules.wrappers.niri.wrap {
-      inherit pkgs;
-      
-      settings = {
-        spawn-at-startup = [
-          (lib.getExe pkgs.noctalia-shell)
-          (lib.getExe (pkgs.writeShellScriptBin "brave-smart-delay" ''
-            count=0
-            while ! busctl --user status org.freedesktop.Notifications >/dev/null 2>&1; do
-              if [ $count -ge 20 ]; then 
-                break # Give up after 10 seconds and just launch anyway
-              fi
-              sleep 0.5
-              count=$((count+1))
-            done
-            
-            exec ${lib.getExe pkgs.brave}
-          ''))
-          "spotify"
-          (lib.getExe (pkgs.writeShellScriptBin "vesktop-delay" ''
-            sleep 3
-            exec ${lib.getExe pkgs.vesktop}
-          ''))
-          (lib.getExe pkgs.telegram-desktop)
-          (lib.getExe pkgs.cinny-desktop)
-        ];
-        xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
+  perSystem =
+    {
+      pkgs,
+      lib,
+      self',
+      ...
+    }:
+    {
+      packages.myNiri = inputs.wrapper-modules.wrappers.niri.wrap {
+        inherit pkgs;
 
-        input.keyboard = {
-          xkb = {
-            layout = "us,ru";
-            options = "grp:alt_shift_toggle,caps:escape";
-          };
-          repeat-rate = 40;
-          repeat-delay = 250;
-        };
+        settings = {
+          spawn-at-startup = [
+            (lib.getExe pkgs.noctalia-shell)
+            (lib.getExe (
+              pkgs.writeShellScriptBin "brave-smart-delay" ''
+                count=0
+                while ! busctl --user status org.freedesktop.Notifications >/dev/null 2>&1; do
+                  if [ $count -ge 20 ]; then 
+                    break # Give up after 10 seconds and just launch anyway
+                  fi
+                  sleep 0.5
+                  count=$((count+1))
+                done
 
-        layout.gaps = 5;
+                exec ${lib.getExe pkgs.brave}
+              ''
+            ))
+            "spotify"
+            (lib.getExe (
+              pkgs.writeShellScriptBin "vesktop-delay" ''
+                sleep 5
+                exec ${lib.getExe pkgs.vesktop}
+              ''
+            ))
+            (lib.getExe pkgs.telegram-desktop)
+            (lib.getExe pkgs.cinny-desktop)
+          ];
+          xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
 
-        layout.focus-ring = {
-          width = 2;
-          active-color = "#fe8019";
-        };
-        
-
-
-        prefer-no-csd = true;
-        # Steam Notification Fix
-        extraConfig = ''
-        workspace "web" { 
-          open-on-output "DP-1" 
-        };
-        workspace "social" { 
-          open-on-output "DP-3" 
-        };
-        workspace "music" { 
-          open-on-output "DP-3" 
-        };
-          window-rule {
-            match app-id="steam" title="^notificationtoasts_\\d+_desktop$"
-            default-floating-position x=10 y=10 relative-to="bottom-right"
-            open-focused false
-          };
-          window-rule {
-            match title="Picture in picture"
-            
-            default-floating-position x=10 y=10 relative-to="bottom-right"
-
-            open-floating true
-            open-focused false
-            
-            default-column-width { proportion 0.25; }
-            default-window-height { proportion 0.25; }
+          input.keyboard = {
+            xkb = {
+              layout = "us,ru";
+              options = "grp:alt_shift_toggle,caps:escape";
+            };
+            repeat-rate = 40;
+            repeat-delay = 250;
           };
 
-          window-rule {
-            match app-id="brave-browser"
-            open-on-workspace "web"
-            open-maximized true
-          };
-          window-rule {
-            match app-id="brave-browser" title="^Brave$|^Notification$"
-            open-maximized false
+          layout.gaps = 5;
+
+          layout.focus-ring = {
+            width = 2;
+            active-color = "#fe8019";
           };
 
-          window-rule {
-            match app-id="vesktop"
-            open-on-workspace "social"
-            open-maximized true
+          prefer-no-csd = true;
+          # Steam Notification Fix
+          extraConfig = ''
+                    workspace "web" { 
+                      open-on-output "DP-1" 
+                    };
+                    workspace "social" { 
+                      open-on-output "DP-3" 
+                    };
+                    workspace "music" { 
+                      open-on-output "DP-3" 
+                    };
+                      window-rule {
+                        match app-id="steam" title="^notificationtoasts_\\d+_desktop$"
+                        default-floating-position x=10 y=10 relative-to="bottom-right"
+                        open-focused false
+                      };
+                      window-rule {
+                        match title="Picture in picture"
+                        
+                        default-floating-position x=10 y=10 relative-to="bottom-right"
+
+                        open-floating true
+                        open-focused false
+                        
+                        default-column-width { proportion 0.25; }
+                        default-window-height { proportion 0.25; }
+                      };
+
+                      window-rule {
+                        match app-id="brave-browser"
+                        open-on-workspace "web"
+                        open-maximized true
+                      };
+                      window-rule {
+                        match app-id="brave-browser" title="^Brave$|^Notification$"
+                        open-maximized false
+                      };
+
+                      window-rule {
+                        match app-id="vesktop"
+                        open-on-workspace "social"
+                        open-maximized true
+                      };
+                      window-rule {
+                        match app-id="org.telegram.desktop"
+                        open-on-workspace "social"
+                        open-maximized true
+                      };
+                      window-rule {
+                        match app-id="cinny"
+                        open-on-workspace "social"
+                        open-maximized true
+                      };
+
+                      window-rule {
+                        match app-id="spotify"
+                        open-on-workspace "music"
+                        open-maximized true
+                      };
+
+                      output "DP-1" {
+                        // Set the exact resolution and refresh rate from your available modes
+                        mode "2560x1440@164.999"
+                
+                        // Enable Variable Refresh Rate (FreeSync/G-Sync)
+                        // variable-refresh-rate true
+                      };
+                      recent-windows {
+                      // Pre-select the "Output" scope when switching windows.i
+                      binds {
+                        Alt+Tab         { next-window     scope="workspace"; }
+                        Alt+Shift+Tab   { previous-window scope="workspace"; }
+                        Alt+grave       { next-window     scope="output"; }
+                        Alt+Shift+grave { previous-window scope="output"; }
+                      }
+            }
+          '';
+
+          binds = {
+            # Terminal
+            "Mod+Return".spawn-sh = lib.getExe pkgs.ghostty;
+            #"Mod+Return".spawn-sh = lib.getExe pkgs.kitty;
+
+            # Apps
+            "Mod+E".spawn-sh = lib.getExe pkgs.nautilus;
+            "Mod+B".spawn-sh = lib.getExe pkgs.brave;
+
+            # Core
+            "Mod+S".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call launcher toggle";
+            "Mod+Space".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call controlCenter toggle";
+            "Mod+Comma".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call settings toggle";
+            "Mod+Q".close-window = { };
+
+            # Window & Column Navigation
+            ## Using Arrows
+            "Mod+Left".focus-column-left = { };
+            "Mod+Right".focus-column-right = { };
+            "Mod+Up".focus-window-up = { };
+            "Mod+Down".focus-window-down = { };
+
+            ## Using Vi-keys (HJKL)
+            # "Mod+H".focus-column-left = {};
+            # "Mod+L".focus-column-right = {};
+            # "Mod+K".focus-window-up = {};
+            # "Mod+J".focus-window-down = {};
+
+            "Mod+Home".focus-column-first = { };
+            "Mod+End".focus-column-last = { };
+
+            # Window & Column Movement
+            "Mod+Ctrl+Left".move-column-left = { };
+            "Mod+Ctrl+Right".move-column-right = { };
+            "Mod+Ctrl+Up".move-window-up = { };
+            "Mod+Ctrl+Down".move-window-down = { };
+
+            "Mod+Ctrl+Shift+Down".move-column-to-workspace-down = { };
+            "Mod+Ctrl+Shift+Up".move-column-to-workspace-up = { };
+
+            "Mod+R".switch-preset-column-width = { };
+
+            "Mod+BracketLeft".consume-or-expel-window-left = { };
+            "Mod+BracketRight".consume-or-expel-window-right = { };
+
+            # "Mod+Ctrl+H".move-column-left = {};
+            # "Mod+Ctrl+L".move-column-right = {};
+            # "Mod+Ctrl+K".move-window-up = {};
+            # "Mod+Ctrl+J".move-window-down = {};
+
+            # Move to Workspace
+            "Mod+Ctrl+1".move-column-to-workspace = 1;
+            "Mod+Ctrl+2".move-column-to-workspace = 2;
+            "Mod+Ctrl+3".move-column-to-workspace = 3;
+            "Mod+Ctrl+4".move-column-to-workspace = 4;
+            "Mod+Ctrl+5".move-column-to-workspace = 5;
+            "Mod+Ctrl+6".move-column-to-workspace = 6;
+            "Mod+Ctrl+7".move-column-to-workspace = 7;
+            "Mod+Ctrl+8".move-column-to-workspace = 8;
+            "Mod+Ctrl+9".move-column-to-workspace = 9;
+
+            "Mod+Shift+1".move-window-to-workspace = 1;
+            "Mod+Shift+2".move-window-to-workspace = 2;
+            "Mod+Shift+3".move-window-to-workspace = 3;
+            "Mod+Shift+4".move-window-to-workspace = 4;
+            "Mod+Shift+5".move-window-to-workspace = 5;
+            "Mod+Shift+6".move-window-to-workspace = 6;
+            "Mod+Shift+7".move-window-to-workspace = 7;
+            "Mod+Shift+8".move-window-to-workspace = 8;
+            "Mod+Shift+9".move-window-to-workspace = 9;
+
+            # Monitor Navigation
+            "Mod+Shift+Left".focus-monitor-left = { };
+            "Mod+Shift+Right".focus-monitor-right = { };
+            #"Mod+Shift+Up".focus-monitor-up = {};
+            #"Mod+Shift+Down".focus-monitor-down = {};
+
+            "Mod+Shift+Ctrl+Left".move-column-to-monitor-left = { };
+            "Mod+Shift+Ctrl+Right".move-column-to-monitor-right = { };
+
+            #  Layout & Window Modes
+            "Mod+F".maximize-column = { };
+            "Mod+Shift+F".fullscreen-window = { };
+            "Mod+M".maximize-window-to-edges = { };
+            "Mod+C".center-column = { };
+            "Mod+Minus".set-column-width = "-10%"; # # хз 25 или 10
+            "Mod+Equal".set-column-width = "+10%";
+            "Mod+Shift+Minus".set-window-height = "-10%";
+            "Mod+Shift+Equal".set-window-height = "+10%";
+
+            "Mod+T".toggle-window-floating = { };
+            "Mod+W".toggle-column-tabbed-display = { };
+            "Mod+O".toggle-overview = { };
+
+            "Mod+Shift+T".switch-focus-between-floating-and-tiling = { };
+
+            # Workspace Management
+            "Mod+1".focus-workspace = 1;
+            "Mod+2".focus-workspace = 2;
+            "Mod+3".focus-workspace = 3;
+            "Mod+4".focus-workspace = 4;
+            "Mod+5".focus-workspace = 5;
+            "Mod+6".focus-workspace = 6;
+            "Mod+7".focus-workspace = 7;
+            "Mod+8".focus-workspace = 8;
+            "Mod+9".focus-workspace = 9;
+            "Mod+Tab".focus-workspace-previous = { };
+
+            "Mod+Shift+Up".focus-workspace-up = { };
+            "Mod+Shift+Down".focus-workspace-down = { };
+
+            # Scroll Navigation
+            "Mod+Shift+WheelScrollDown".focus-column-left = { };
+            "Mod+Shift+WheelScrollUp".focus-column-right = { };
+            "Mod+WheelScrollDown".focus-workspace-down = { };
+            "Mod+WheelScrollUp".focus-workspace-up = { };
+
+            # Screenshots
+            "Print".screenshot = { };
+            "Ctrl+Print".screenshot-screen = { };
+            "Alt+Print".screenshot-window = { };
+
+            # Misc
+            "Mod+Shift+Escape".show-hotkey-overlay = { };
+            #"Mod+Shift+P".power-off-monitors = {};
+            "Ctrl+Alt+Delete".quit = { };
+            "Super+Shift+Q".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call sessionMenu toggle";
+
+            # Media
+            "XF86AudioRaiseVolume".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume increase";
+            "XF86AudioLowerVolume".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume decrease";
+            "XF86AudioMute".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume muteOutput";
+            "XF86AudioMicMute".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume micmute";
+
+            # Media Player Controls
+            "XF86AudioPlay".spawn-sh = "${lib.getExe pkgs.playerctl} play-pause";
+            "XF86AudioNext".spawn-sh = "${lib.getExe pkgs.playerctl} next";
+            "XF86AudioPrev".spawn-sh = "${lib.getExe pkgs.playerctl} previous";
+
+            # Brightness
+            #"XF86MonBrightnessUp".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call brightness increase";
+            #"XF86MonBrightnessDown".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call brightness decrease";
           };
-          window-rule {
-            match app-id="org.telegram.desktop"
-            open-on-workspace "social"
-            open-maximized true
-          };
-          window-rule {
-            match app-id="cinny"
-            open-on-workspace "social"
-            open-maximized true
-          };
-
-          window-rule {
-            match app-id="spotify"
-            open-on-workspace "music"
-            open-maximized true
-          };
-
-          output "DP-1" {
-            // Set the exact resolution and refresh rate from your available modes
-            mode "2560x1440@164.999"
-    
-            // Enable Variable Refresh Rate (FreeSync/G-Sync)
-            // variable-refresh-rate true
-          };
-          recent-windows {
-          // Pre-select the "Output" scope when switching windows.i
-          binds {
-            Alt+Tab         { next-window     scope="workspace"; }
-            Alt+Shift+Tab   { previous-window scope="workspace"; }
-            Alt+grave       { next-window     scope="output"; }
-            Alt+Shift+grave { previous-window scope="output"; }
-          }
-}
-        '';
-        
-
-        binds = {
-          # Terminal
-          "Mod+Return".spawn-sh = lib.getExe pkgs.ghostty;
-          #"Mod+Return".spawn-sh = lib.getExe pkgs.kitty;
-
-
-          # Apps
-          "Mod+E".spawn-sh = lib.getExe pkgs.nautilus;
-          "Mod+B".spawn-sh = lib.getExe pkgs.brave;
-
-
-          # Core
-          "Mod+S".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call launcher toggle";
-          "Mod+Space".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call controlCenter toggle";
-          "Mod+Comma".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call settings toggle";
-          "Mod+Q".close-window = {};
-
-
-          # Window & Column Navigation
-          ## Using Arrows
-          "Mod+Left".focus-column-left = {};
-          "Mod+Right".focus-column-right = {};
-          "Mod+Up".focus-window-up = {};
-          "Mod+Down".focus-window-down = {};
-          
-          ## Using Vi-keys (HJKL)
-          # "Mod+H".focus-column-left = {};
-          # "Mod+L".focus-column-right = {};
-          # "Mod+K".focus-window-up = {};
-          # "Mod+J".focus-window-down = {};
-          
-          "Mod+Home".focus-column-first = {};
-          "Mod+End".focus-column-last = {};
-
-
-          # Window & Column Movement
-          "Mod+Ctrl+Left".move-column-left = {};
-          "Mod+Ctrl+Right".move-column-right = {};
-          "Mod+Ctrl+Up".move-window-up = {};
-          "Mod+Ctrl+Down".move-window-down = {};
-
-          "Mod+Ctrl+Shift+Down".move-column-to-workspace-down = {};
-          "Mod+Ctrl+Shift+Up".move-column-to-workspace-up = {};
-
-          "Mod+R".switch-preset-column-width = {};
-
-          "Mod+BracketLeft".consume-or-expel-window-left = {};
-          "Mod+BracketRight".consume-or-expel-window-right = {};
-          
-          # "Mod+Ctrl+H".move-column-left = {};
-          # "Mod+Ctrl+L".move-column-right = {};
-          # "Mod+Ctrl+K".move-window-up = {};
-          # "Mod+Ctrl+J".move-window-down = {};
-          
-
-          # Move to Workspace
-          "Mod+Ctrl+1".move-column-to-workspace = 1;
-          "Mod+Ctrl+2".move-column-to-workspace = 2;
-          "Mod+Ctrl+3".move-column-to-workspace = 3;
-          "Mod+Ctrl+4".move-column-to-workspace = 4;
-          "Mod+Ctrl+5".move-column-to-workspace = 5;
-          "Mod+Ctrl+6".move-column-to-workspace = 6;
-          "Mod+Ctrl+7".move-column-to-workspace = 7;
-          "Mod+Ctrl+8".move-column-to-workspace = 8;
-          "Mod+Ctrl+9".move-column-to-workspace = 9;
-
-          "Mod+Shift+1".move-window-to-workspace = 1;
-          "Mod+Shift+2".move-window-to-workspace = 2;
-          "Mod+Shift+3".move-window-to-workspace = 3;
-          "Mod+Shift+4".move-window-to-workspace = 4;
-          "Mod+Shift+5".move-window-to-workspace = 5;
-          "Mod+Shift+6".move-window-to-workspace = 6;
-          "Mod+Shift+7".move-window-to-workspace = 7;
-          "Mod+Shift+8".move-window-to-workspace = 8;
-          "Mod+Shift+9".move-window-to-workspace = 9;
-
-
-          # Monitor Navigation
-          "Mod+Shift+Left".focus-monitor-left = {};
-          "Mod+Shift+Right".focus-monitor-right = {};
-          #"Mod+Shift+Up".focus-monitor-up = {};
-          #"Mod+Shift+Down".focus-monitor-down = {};
-          
-          "Mod+Shift+Ctrl+Left".move-column-to-monitor-left = {};
-          "Mod+Shift+Ctrl+Right".move-column-to-monitor-right = {};
-
-
-          #  Layout & Window Modes
-          "Mod+F".maximize-column = {};
-          "Mod+Shift+F".fullscreen-window = {};
-          "Mod+M".maximize-window-to-edges = {};
-          "Mod+C".center-column = {};
-          "Mod+Minus".set-column-width = "-10%"; ## хз 25 или 10
-          "Mod+Equal".set-column-width = "+10%";
-          "Mod+Shift+Minus".set-window-height = "-10%";
-          "Mod+Shift+Equal".set-window-height = "+10%";
-          
-          "Mod+T".toggle-window-floating = {};
-          "Mod+W".toggle-column-tabbed-display = {};
-          "Mod+O".toggle-overview = {};
-
-          "Mod+Shift+T".switch-focus-between-floating-and-tiling = {};
-
-
-          # Workspace Management
-          "Mod+1".focus-workspace = 1;
-          "Mod+2".focus-workspace = 2;
-          "Mod+3".focus-workspace = 3;
-          "Mod+4".focus-workspace = 4;
-          "Mod+5".focus-workspace = 5;
-          "Mod+6".focus-workspace = 6;
-          "Mod+7".focus-workspace = 7;
-          "Mod+8".focus-workspace = 8;
-          "Mod+9".focus-workspace = 9;
-          "Mod+Tab".focus-workspace-previous = {}; 
-
-          "Mod+Shift+Up".focus-workspace-up = {};
-          "Mod+Shift+Down".focus-workspace-down = {}; 
-
-
-          # Scroll Navigation
-          "Mod+Shift+WheelScrollDown".focus-column-left = {};
-          "Mod+Shift+WheelScrollUp".focus-column-right = {};
-          "Mod+WheelScrollDown".focus-workspace-down = {};
-          "Mod+WheelScrollUp".focus-workspace-up = {};
-
-
-          # Screenshots
-          "Print".screenshot = {};
-          "Ctrl+Print".screenshot-screen = {};
-          "Alt+Print".screenshot-window = {};
-
-
-          # Misc
-          "Mod+Shift+Escape".show-hotkey-overlay = {};
-          #"Mod+Shift+P".power-off-monitors = {};
-          "Ctrl+Alt+Delete".quit = {};
-          "Super+Shift+Q".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call sessionMenu toggle"; 
-
-
-          # Media
-          "XF86AudioRaiseVolume".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume increase";
-          "XF86AudioLowerVolume".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume decrease";
-          "XF86AudioMute".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume muteOutput";
-          "XF86AudioMicMute".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume micmute";
-          
-          # Media Player Controls
-          "XF86AudioPlay".spawn-sh = "${lib.getExe pkgs.playerctl} play-pause";
-          "XF86AudioNext".spawn-sh = "${lib.getExe pkgs.playerctl} next";
-          "XF86AudioPrev".spawn-sh = "${lib.getExe pkgs.playerctl} previous";
-         
-          # Brightness
-          #"XF86MonBrightnessUp".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call brightness increase";
-          #"XF86MonBrightnessDown".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call brightness decrease";
         };
       };
     };
-  };
 }
