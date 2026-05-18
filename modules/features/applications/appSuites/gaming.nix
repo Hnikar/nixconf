@@ -13,17 +13,8 @@
       imports = [
         self.nixosModules.steam
       ];
-      packages = with pkgs; [
-        lutris
-        protonup-qt
-      ];
-
-      nixpkgs.overlays = [
-        (final: prev: {
-          openldap = prev.openldap.overrideAttrs (_: {
-            doCheck = false;
-          });
-        })
+      services.flatpak.packages = [
+        "net.lutris.Lutris"
       ];
 
     };

@@ -19,6 +19,7 @@
         self.nixosModules.razer
         self.nixosModules.appimage
         self.nixosModules.pipewire
+        self.nixosModules.flatpak
 
         # TUI applications
         self.nixosModules.vim
@@ -177,7 +178,6 @@
         prismlauncher
         rimsort
         nixfmt
-        lutris
 
         # Productivity
         onlyoffice-desktopeditors
