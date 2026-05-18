@@ -13,9 +13,21 @@
       imports = [
         self.nixosModules.steam
       ];
-      services.flatpak.packages = [
-        "net.lutris.Lutris"
+
+      environment.systemPackages = with pkgs; [
+        heroic
       ];
 
+      services.joycond.enable = true;
+      programs.gamemode.enable = true;
+
+      programs.gamescope = {
+        enable = true;
+        capSysNice = true;
+        args = [
+          "--rt"
+          "--expose-wayland"
+        ];
+      };
     };
 }

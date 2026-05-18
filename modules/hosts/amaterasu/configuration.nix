@@ -19,7 +19,7 @@
         self.nixosModules.razer
         self.nixosModules.appimage
         self.nixosModules.pipewire
-        self.nixosModules.flatpak
+        #self.nixosModules.flatpak
 
         # TUI applications
         self.nixosModules.vim
