@@ -37,11 +37,11 @@
         self.nixosModules.discord
         self.nixosModules.ghostty
         self.nixosModules.spicetify
-        self.nixosModules.steam
         self.nixosModules.vscode
         ## App Suites
         self.nixosModules.communicationApps
         self.nixosModules.gnomeSuite
+        self.nixosModules.gaming
       ];
 
       # Networking
@@ -177,6 +177,7 @@
         prismlauncher
         rimsort
         nixfmt
+        lutris
 
         # Productivity
         onlyoffice-desktopeditors
