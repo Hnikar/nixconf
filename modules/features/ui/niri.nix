@@ -45,7 +45,7 @@
               ''
             ))
             (lib.getExe pkgs.telegram-desktop)
-            (lib.getExe pkgs.cinny-desktop)
+            (lib.getExe pkgs.fractal)
           ];
           xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
 
@@ -116,6 +116,12 @@
                       };
                       window-rule {
                         match app-id="cinny"
+                        open-on-workspace "social"
+                        open-maximized true
+                      };
+
+                      window-rule {
+                        match app-id="fractal"
                         open-on-workspace "social"
                         open-maximized true
                       };
