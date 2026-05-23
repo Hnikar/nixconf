@@ -23,6 +23,7 @@
 
         # TUI applications
         self.nixosModules.vim
+        self.nixosModules.dev
 
         # Desktop / UI
         self.nixosModules.niri
