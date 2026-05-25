@@ -121,7 +121,7 @@
                       };
 
                       window-rule {
-                        match app-id="fractal"
+                        match app-id="org.gnome.Fractal"
                         open-on-workspace "social"
                         open-maximized true
                       };
