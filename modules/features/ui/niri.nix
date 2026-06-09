@@ -224,6 +224,9 @@
             # Monitor Navigation
             "Mod+Shift+Left".focus-monitor-left = { };
             "Mod+Shift+Right".focus-monitor-right = { };
+
+            "Mod+Alt+1".focus-monitor = "DP-1";
+            "Mod+Alt+2".focus-monitor = "DP-3";
             #"Mod+Shift+Up".focus-monitor-up = {};
             #"Mod+Shift+Down".focus-monitor-down = {};
 
