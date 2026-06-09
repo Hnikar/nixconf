@@ -54,15 +54,15 @@
             telescope.enable = true;
             autocomplete.blink-cmp.enable = true;
 
-            # filetree = {
-            #   neo-tree = {
-            #     enable = true;
-            #   };
-            # };
+            filetree = {
+              neo-tree = {
+                enable = true;
+              };
+            };
 
-            # tabline = {
-            #   nvimBufferline.enable = true;
-            # };
+            tabline = {
+              nvimBufferline.enable = true;
+            };
 
             # treesitter.context.enable = true;
 
@@ -127,12 +127,12 @@
             #   todo-comments.enable = true;
             # };
 
-            # terminal = {
-            #   toggleterm = {
-            #     enable = true;
-            #     lazygit.enable = true;
-            #   };
-            # };
+            terminal = {
+              toggleterm = {
+                enable = true;
+                lazygit.enable = true;
+              };
+            };
 
             # ui = {
             #   borders.enable = true;
@@ -160,27 +160,27 @@
             #   fastaction.enable = true;
             # };
 
-            # assistant = {
-            #   chatgpt.enable = false;
-            #   copilot = {
-            #     enable = false;
-            #     cmp.enable = true;
-            #   };
-            #   codecompanion-nvim.enable = false;
-            #   avante-nvim.enable = true;
-            # };
+            assistant = {
+              chatgpt.enable = false;
+              copilot = {
+                enable = false;
+                cmp.enable = true;
+              };
+              codecompanion-nvim.enable = false;
+              avante-nvim.enable = true;
+            };
 
             # session = {
             #   nvim-session-manager.enable = false;
             # };
 
-            # gestures = {
-            #   gesture-nvim.enable = false;
-            # };
+            gestures = {
+              gesture-nvim.enable = false;
+            };
 
-            # comments = {
-            #   comment-nvim.enable = true;
-            # };
+            comments = {
+              comment-nvim.enable = true;
+            };
 
             # presence = {
             #   neocord.enable = false;
