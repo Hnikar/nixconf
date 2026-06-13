@@ -6,6 +6,7 @@
       nixpkgs.overlays = [ inputs.millennium.overlays.default ];
       programs.steam = {
         enable = true;
+        gamescopeSession.enable = true;
         package = pkgs.millennium-steam;
         extraCompatPackages = [ pkgs.proton-ge-bin ];
       };
