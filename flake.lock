@@ -34,6 +34,22 @@
         "type": "github"
       }
     },
+    "creamlinux-installer": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1779501972,
+        "narHash": "sha256-gH2Yyl8IEVgACimMb5G+EWUWyJtu5yBDqKjOdZ5gyts=",
+        "owner": "Novattz",
+        "repo": "creamlinux-installer",
+        "rev": "a1be636a8c00bc1c077cd37fa6a83f5cc8e5e17f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Novattz",
+        "repo": "creamlinux-installer",
+        "type": "github"
+      }
+    },
     "curl-src": {
       "flake": false,
       "locked": {
@@ -690,6 +706,7 @@
     },
     "root": {
       "inputs": {
+        "creamlinux-installer": "creamlinux-installer",
         "distro-grub-themes": "distro-grub-themes",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",

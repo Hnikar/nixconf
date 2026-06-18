@@ -14,6 +14,11 @@
 
     millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
 
+    creamlinux-installer = {
+      url = "github:Novattz/creamlinux-installer";
+      flake = false;
+    };
+
     distro-grub-themes.url = "github:AdisonCavani/distro-grub-themes";
 
     noctalia = {

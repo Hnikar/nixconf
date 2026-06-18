@@ -11,6 +11,7 @@
     }:
     {
       imports = [
+        self.nixosModules.creamlinux
         self.nixosModules.steam
       ];
 
