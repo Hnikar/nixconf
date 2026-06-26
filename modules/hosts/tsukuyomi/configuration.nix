@@ -53,7 +53,7 @@
 
       boot.loader.systemd-boot.enable = true;
       boot.loader.efi.canTouchEfiVariables = true;
-      boot.resumeDevice = hibernateResumeDevice;
+      boot.resumeDevice = lib.mkIf (hibernateResumeOffset != null) hibernateResumeDevice;
       boot.kernelParams = lib.optional (
         hibernateResumeOffset != null
       ) "resume_offset=${toString hibernateResumeOffset}";
