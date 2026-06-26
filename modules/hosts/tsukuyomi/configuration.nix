@@ -2,6 +2,10 @@
 {
   flake.nixosModules.hostTsukuyomiConfiguration =
     { pkgs, lib, ... }:
+    let
+      hibernateResumeOffset = null;
+      hibernateResumeDevice = "/dev/mapper/luks-b9e28258-91ec-41b1-b293-728b4780cf65";
+    in
     {
       imports = [
         # Hardware and boot
@@ -49,6 +53,10 @@
 
       boot.loader.systemd-boot.enable = true;
       boot.loader.efi.canTouchEfiVariables = true;
+      boot.resumeDevice = hibernateResumeDevice;
+      boot.kernelParams = lib.optional (
+        hibernateResumeOffset != null
+      ) "resume_offset=${toString hibernateResumeOffset}";
 
       # Enable CUPS to print documents.
       services.printing.enable = true;
@@ -197,6 +205,27 @@
         wget
         zip
         efibootmgr
+        (writeShellApplication {
+          name = "tsukuyomi-hibernate-offset";
+          runtimeInputs = [
+            btrfs-progs
+            coreutils
+          ];
+          text = ''
+                        if [[ ! -e /swapfile ]]; then
+                          echo "/swapfile does not exist yet. Rebuild once, then run this command again." >&2
+                          exit 1
+                        fi
+
+            offset="$(btrfs inspect-internal map-swapfile -r /swapfile)"
+
+            echo "Set this in modules/hosts/tsukuyomi/configuration.nix:"
+            echo
+            echo "  hibernateResumeOffset = $offset;"
+            echo
+            echo "Then rebuild once more."
+          '';
+        })
 
         # Media
         foliate
