@@ -54,20 +54,10 @@
           if ${pkgs.wireplumber}/bin/wpctl get-volume @DEFAULT_AUDIO_SINK@ | ${pkgs.gnugrep}/bin/grep -q '\[MUTED\]'; then
             ${pkgs.alsa-utils}/bin/amixer -q set Master mute || true
             ${pkgs.alsa-utils}/bin/amixer -q set Speaker mute || true
-            led_value=1
           else
             ${pkgs.alsa-utils}/bin/amixer -q set Master unmute || true
             ${pkgs.alsa-utils}/bin/amixer -q set Speaker unmute || true
-            led_value=0
           fi
-
-          for led in /sys/class/leds/*::mute /sys/class/leds/*mute; do
-            case "$led" in
-              *micmute*) continue ;;
-            esac
-            [ -e "$led/brightness" ] || continue
-            echo "$led_value" > "$led/brightness" 2>/dev/null || true
-          done
         ''
       );
 
@@ -90,18 +80,11 @@
             ${pkgs.alsa-utils}/bin/amixer -q set Capture nocap || true
             ${pkgs.alsa-utils}/bin/amixer -q set Mic mute || true
             ${pkgs.alsa-utils}/bin/amixer -q set "Internal Mic" mute || true
-            led_value=1
           else
             ${pkgs.alsa-utils}/bin/amixer -q set Capture cap || true
             ${pkgs.alsa-utils}/bin/amixer -q set Mic unmute || true
             ${pkgs.alsa-utils}/bin/amixer -q set "Internal Mic" unmute || true
-            led_value=0
           fi
-
-          for led in /sys/class/leds/*::micmute /sys/class/leds/*micmute; do
-            [ -e "$led/brightness" ] || continue
-            echo "$led_value" > "$led/brightness" 2>/dev/null || true
-          done
         ''
       );
 

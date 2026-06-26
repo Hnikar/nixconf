@@ -78,13 +78,6 @@
         HandleLidSwitchExternalPower = "ignore";
       };
 
-      services.udev.extraRules = ''
-        SUBSYSTEM=="leds", KERNEL=="*::mute", MODE="0666"
-        SUBSYSTEM=="leds", KERNEL=="*mute", MODE="0666"
-        SUBSYSTEM=="leds", KERNEL=="*::micmute", MODE="0666"
-        SUBSYSTEM=="leds", KERNEL=="*micmute", MODE="0666"
-      '';
-
       # Localization
       time.timeZone = "Europe/Warsaw";
       i18n.defaultLocale = "en_US.UTF-8";
