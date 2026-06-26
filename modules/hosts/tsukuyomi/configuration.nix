@@ -11,7 +11,7 @@
         # Hardware and boot
         self.nixosModules.hostTsukuyomiHardware
         #self.nixosModules.grub
-        #self.nixosModules.plymouth
+        self.nixosModules.plymouth
 
         # Services and hardware helpers
         self.nixosModules.bluetooth
