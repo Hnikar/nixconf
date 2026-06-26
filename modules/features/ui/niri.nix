@@ -118,6 +118,7 @@
         {
           spawn-at-startup,
           extraConfig,
+          inputSettings ? { },
           monitorBinds ? { },
         }:
         inputs.wrapper-modules.wrappers.niri.wrap {
@@ -128,14 +129,17 @@
 
             xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
 
-            input.keyboard = {
-              xkb = {
-                layout = "us,ru";
-                options = "grp:alt_shift_toggle,caps:escape";
+            input = {
+              keyboard = {
+                xkb = {
+                  layout = "us,ru";
+                  options = "grp:alt_shift_toggle,caps:escape";
+                };
+                repeat-rate = 40;
+                repeat-delay = 250;
               };
-              repeat-rate = 40;
-              repeat-delay = 250;
-            };
+            }
+            // inputSettings;
 
             layout.gaps = 5;
 
@@ -352,6 +356,10 @@
             mode "1920x1080@60.001"
           };
         '';
+
+        inputSettings = {
+          touchpad.natural-scroll = _: { };
+        };
       };
     };
 }
