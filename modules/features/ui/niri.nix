@@ -47,6 +47,36 @@
         ''
       );
 
+      muteOutput = lib.getExe (
+        pkgs.writeShellScriptBin "mute-output" ''
+          ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+
+          if ${pkgs.wireplumber}/bin/wpctl get-volume @DEFAULT_AUDIO_SINK@ | ${pkgs.gnugrep}/bin/grep -q '\[MUTED\]'; then
+            ${pkgs.alsa-utils}/bin/amixer -q set Master mute || true
+            ${pkgs.alsa-utils}/bin/amixer -q set Speaker mute || true
+          else
+            ${pkgs.alsa-utils}/bin/amixer -q set Master unmute || true
+            ${pkgs.alsa-utils}/bin/amixer -q set Speaker unmute || true
+          fi
+        ''
+      );
+
+      muteInput = lib.getExe (
+        pkgs.writeShellScriptBin "mute-input" ''
+          ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+
+          if ${pkgs.wireplumber}/bin/wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | ${pkgs.gnugrep}/bin/grep -q '\[MUTED\]'; then
+            ${pkgs.alsa-utils}/bin/amixer -q set Capture nocap || true
+            ${pkgs.alsa-utils}/bin/amixer -q set Mic mute || true
+            ${pkgs.alsa-utils}/bin/amixer -q set "Internal Mic" mute || true
+          else
+            ${pkgs.alsa-utils}/bin/amixer -q set Capture cap || true
+            ${pkgs.alsa-utils}/bin/amixer -q set Mic unmute || true
+            ${pkgs.alsa-utils}/bin/amixer -q set "Internal Mic" unmute || true
+          fi
+        ''
+      );
+
       commonExtraConfig = ''
         window-rule {
           match app-id="steam" title="^notificationtoasts_\\d+_desktop$"
@@ -283,8 +313,8 @@
               # Media
               "XF86AudioRaiseVolume".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume increase";
               "XF86AudioLowerVolume".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume decrease";
-              "XF86AudioMute".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume muteOutput";
-              "XF86AudioMicMute".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume micmute";
+              "XF86AudioMute".spawn-sh = muteOutput;
+              "XF86AudioMicMute".spawn-sh = muteInput;
 
               # Media Player Controls
               "XF86AudioPlay".spawn-sh = "${lib.getExe pkgs.playerctl} play-pause";

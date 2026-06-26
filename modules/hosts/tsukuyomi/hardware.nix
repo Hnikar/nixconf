@@ -24,7 +24,11 @@
         "rtsx_pci_sdmmc"
       ];
       boot.initrd.kernelModules = [ ];
-      boot.kernelModules = [ "kvm-amd" ];
+      boot.kernelModules = [
+        "kvm-amd"
+        "hp-wmi"
+        "snd-ctl-led"
+      ];
       boot.extraModulePackages = [ ];
 
       fileSystems."/" = {
