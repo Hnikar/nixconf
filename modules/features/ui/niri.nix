@@ -118,6 +118,7 @@
         {
           spawn-at-startup,
           extraConfig,
+          extraBinds ? { },
           inputSettings ? { },
           monitorBinds ? { },
         }:
@@ -294,6 +295,7 @@
               #"XF86MonBrightnessUp".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call brightness increase";
               #"XF86MonBrightnessDown".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call brightness decrease";
             }
+            // extraBinds
             // monitorBinds;
           };
         };
@@ -358,7 +360,15 @@
         '';
 
         inputSettings = {
-          touchpad.natural-scroll = _: { };
+          touchpad = {
+            natural-scroll = _: { };
+            tap = _: { };
+          };
+        };
+
+        extraBinds = {
+          "XF86MonBrightnessUp".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call brightness increase";
+          "XF86MonBrightnessDown".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call brightness decrease";
         };
       };
     };
