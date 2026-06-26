@@ -79,6 +79,13 @@
       services.power-profiles-daemon.enable = true;
       services.thermald.enable = true;
       services.upower.enable = true;
+      services.iio-niri = {
+        enable = true;
+        extraArgs = [
+          "--monitor"
+          "eDP-1"
+        ];
+      };
       powerManagement.powertop.enable = true;
       hardware.enableAllFirmware = true;
 
