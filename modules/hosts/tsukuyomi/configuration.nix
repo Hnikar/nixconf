@@ -53,22 +53,6 @@
       # Enable CUPS to print documents.
       services.printing.enable = true;
 
-      # Enable sound with pipewire.
-      services.pulseaudio.enable = false;
-      security.rtkit.enable = true;
-      services.pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulse.enable = true;
-        # If you want to use JACK applications, uncomment this
-        #jack.enable = true;
-
-        # use the example session manager (no others are packaged yet so this is enabled by default,
-        # no need to redefine it in your config for now)
-        #media-session.enable = true;
-      };
-
       # Networking
       networking.hostName = "Tsukuyomi";
       networking.networkmanager.enable = true;
@@ -93,6 +77,13 @@
         HandleLidSwitch = "suspend";
         HandleLidSwitchExternalPower = "ignore";
       };
+
+      services.udev.extraRules = ''
+        SUBSYSTEM=="leds", KERNEL=="*::mute", MODE="0666"
+        SUBSYSTEM=="leds", KERNEL=="*mute", MODE="0666"
+        SUBSYSTEM=="leds", KERNEL=="*::micmute", MODE="0666"
+        SUBSYSTEM=="leds", KERNEL=="*micmute", MODE="0666"
+      '';
 
       # Localization
       time.timeZone = "Europe/Warsaw";

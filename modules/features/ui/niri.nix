@@ -54,26 +54,54 @@
           if ${pkgs.wireplumber}/bin/wpctl get-volume @DEFAULT_AUDIO_SINK@ | ${pkgs.gnugrep}/bin/grep -q '\[MUTED\]'; then
             ${pkgs.alsa-utils}/bin/amixer -q set Master mute || true
             ${pkgs.alsa-utils}/bin/amixer -q set Speaker mute || true
+            led_value=1
           else
             ${pkgs.alsa-utils}/bin/amixer -q set Master unmute || true
             ${pkgs.alsa-utils}/bin/amixer -q set Speaker unmute || true
+            led_value=0
           fi
+
+          for led in /sys/class/leds/*::mute /sys/class/leds/*mute; do
+            case "$led" in
+              *micmute*) continue ;;
+            esac
+            [ -e "$led/brightness" ] || continue
+            echo "$led_value" > "$led/brightness" 2>/dev/null || true
+          done
         ''
       );
 
       muteInput = lib.getExe (
         pkgs.writeShellScriptBin "mute-input" ''
+          state_dir="''${XDG_RUNTIME_DIR:-/tmp}"
+          state_file="$state_dir/niri-mute-input.last"
+          now="$(${pkgs.coreutils}/bin/date +%s%3N)"
+          last="$(${pkgs.coreutils}/bin/cat "$state_file" 2>/dev/null || echo 0)"
+
+          if [ $((now - last)) -lt 700 ]; then
+            exit 0
+          fi
+
+          echo "$now" > "$state_file"
+
           ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 
           if ${pkgs.wireplumber}/bin/wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | ${pkgs.gnugrep}/bin/grep -q '\[MUTED\]'; then
             ${pkgs.alsa-utils}/bin/amixer -q set Capture nocap || true
             ${pkgs.alsa-utils}/bin/amixer -q set Mic mute || true
             ${pkgs.alsa-utils}/bin/amixer -q set "Internal Mic" mute || true
+            led_value=1
           else
             ${pkgs.alsa-utils}/bin/amixer -q set Capture cap || true
             ${pkgs.alsa-utils}/bin/amixer -q set Mic unmute || true
             ${pkgs.alsa-utils}/bin/amixer -q set "Internal Mic" unmute || true
+            led_value=0
           fi
+
+          for led in /sys/class/leds/*::micmute /sys/class/leds/*micmute; do
+            [ -e "$led/brightness" ] || continue
+            echo "$led_value" > "$led/brightness" 2>/dev/null || true
+          done
         ''
       );
 
