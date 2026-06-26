@@ -47,21 +47,7 @@
         ''
       );
 
-      muteOutput = lib.getExe (
-        pkgs.writeShellScriptBin "mute-output" ''
-          ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-
-          if ${pkgs.wireplumber}/bin/wpctl get-volume @DEFAULT_AUDIO_SINK@ | ${pkgs.gnugrep}/bin/grep -q '\[MUTED\]'; then
-            ${pkgs.alsa-utils}/bin/amixer -q set Master mute || true
-            ${pkgs.alsa-utils}/bin/amixer -q set Speaker mute || true
-          else
-            ${pkgs.alsa-utils}/bin/amixer -q set Master unmute || true
-            ${pkgs.alsa-utils}/bin/amixer -q set Speaker unmute || true
-          fi
-        ''
-      );
-
-      muteInput = lib.getExe (
+      tsukuyomiMuteInput = lib.getExe (
         pkgs.writeShellScriptBin "mute-input" ''
           state_dir="''${XDG_RUNTIME_DIR:-/tmp}"
           state_file="$state_dir/niri-mute-input.last"
@@ -324,8 +310,7 @@
               # Media
               "XF86AudioRaiseVolume".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume increase";
               "XF86AudioLowerVolume".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume decrease";
-              "XF86AudioMute".spawn-sh = muteOutput;
-              "XF86AudioMicMute".spawn-sh = muteInput;
+              "XF86AudioMute".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume muteOutput";
 
               # Media Player Controls
               "XF86AudioPlay".spawn-sh = "${lib.getExe pkgs.playerctl} play-pause";
@@ -408,6 +393,7 @@
         };
 
         extraBinds = {
+          "XF86AudioMicMute".spawn-sh = tsukuyomiMuteInput;
           "XF86MonBrightnessUp".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call brightness increase";
           "XF86MonBrightnessDown".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call brightness decrease";
         };
