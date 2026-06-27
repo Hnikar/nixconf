@@ -7,7 +7,7 @@
         # Hardware and boot
         self.nixosModules.hostAmaterasuHardware
         self.nixosModules.grub
-        self.nixosModules.plymouth
+        #self.nixosModules.plymouth
 
         # Services and hardware helpers
         self.nixosModules.bluetooth
