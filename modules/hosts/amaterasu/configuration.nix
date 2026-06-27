@@ -189,7 +189,6 @@
 
         # Misc
         codex
-        gearlever
       ];
       xdg.terminal-exec.enable = true;
 

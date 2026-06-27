@@ -191,16 +191,10 @@
 
         # Media
         foliate
-        #joplin-desktop
-        #logseq
-        #obs-studio
-        #osu-lazer-bin
-        #prismlauncher
-        #rimsort
         nixfmt
 
         # Productivity
-        #onlyoffice-desktopeditors
+        onlyoffice-desktopeditors
         #qbittorrent
 
         # Security
@@ -208,7 +202,7 @@
         proton-vpn
 
         # Misc
-        #codex
+        #code
       ];
       xdg.terminal-exec.enable = true;
 
