@@ -1,22 +1,30 @@
-{ inputs, ... }:
+{ self, inputs, ... }:
 {
   flake.nixosModules.niri =
     {
       config,
-      lib,
       pkgs,
-      username,
       ...
     }:
     let
       system = pkgs.stdenv.hostPlatform.system;
-      noctalia = lib.getExe inputs.noctalia.packages.${system}.default;
-      xwaylandSatellite = lib.getExe pkgs.xwayland-satellite;
+      packageName = "myNiri-${config.networking.hostName}";
+    in
+    {
+      programs.niri = {
+        enable = true;
+        package = self.packages.${system}.${packageName};
+      };
+    };
 
-      sh = command: ''"sh" "-c" "${command}"'';
-      spawn = command: ''spawn ${sh command};'';
-      spawnAtStartup = command: ''spawn-at-startup ${sh command};'';
-
+  perSystem =
+    {
+      pkgs,
+      lib,
+      self',
+      ...
+    }:
+    let
       braveSmartDelay = lib.getExe (
         pkgs.writeShellScriptBin "brave-smart-delay" ''
           count=0
@@ -71,57 +79,56 @@
           match app-id="steam" title="^notificationtoasts_\\d+_desktop$"
           default-floating-position x=10 y=10 relative-to="bottom-right"
           open-focused false
-        }
-
+        };
         window-rule {
           match title="Picture in picture"
+
           default-floating-position x=10 y=10 relative-to="bottom-right"
+
           open-floating true
           open-focused false
+
           default-column-width { proportion 0.25; }
           default-window-height { proportion 0.25; }
-        }
+        };
 
         window-rule {
           match app-id="brave-browser"
           open-on-workspace "web"
           open-maximized true
-        }
-
+        };
         window-rule {
           match app-id="brave-browser" title="^Brave$|^Notification$"
           open-maximized false
-        }
+        };
 
         window-rule {
           match app-id="vesktop"
           open-on-workspace "social"
           open-maximized true
-        }
-
+        };
         window-rule {
           match app-id="org.telegram.desktop"
           open-on-workspace "social"
           open-maximized true
-        }
-
+        };
         window-rule {
           match app-id="cinny"
           open-on-workspace "social"
           open-maximized true
-        }
+        };
 
         window-rule {
           match app-id="org.gnome.Fractal"
           open-on-workspace "social"
           open-maximized true
-        }
+        };
 
         window-rule {
           match app-id="spotify"
           open-on-workspace "music"
           open-maximized true
-        }
+        };
 
         recent-windows {
           // Pre-select the "Output" scope when switching windows.i
@@ -134,282 +141,262 @@
         }
       '';
 
-      commonConfig =
+      mkNiri =
         {
-          startup,
+          spawn-at-startup,
           extraConfig,
-          touchpadConfig ? "",
-          extraBinds ? "",
-          monitorBinds ? "",
+          extraBinds ? { },
+          inputSettings ? { },
+          monitorBinds ? { },
         }:
-        ''
-          ${lib.concatMapStringsSep "\n" spawnAtStartup startup}
+        inputs.wrapper-modules.wrappers.niri.wrap {
+          inherit pkgs;
 
-          xwayland-satellite {
-            path "${xwaylandSatellite}"
-          }
+          settings = {
+            inherit spawn-at-startup;
 
-          input {
-            keyboard {
-              xkb {
-                layout "us,ru"
-                options "grp:alt_shift_toggle"
-              }
-              repeat-rate 40
-              repeat-delay 250
+            xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
+
+            input = {
+              keyboard = {
+                xkb = {
+                  layout = "us,ru";
+                  options = "grp:alt_shift_toggle";
+                };
+                repeat-rate = 40;
+                repeat-delay = 250;
+              };
             }
+            // inputSettings;
 
-            ${touchpadConfig}
-          }
+            layout.gaps = 5;
 
-          layout {
-            gaps 5
+            layout.focus-ring = {
+              width = 2;
+              active-color = "#fe8019";
+            };
 
-            focus-ring {
-              width 2
-              active-color "#fe8019"
+            prefer-no-csd = true;
+            extraConfig = extraConfig + commonExtraConfig;
+
+            binds = {
+              # Terminal
+              "Mod+Return".spawn-sh = lib.getExe pkgs.ghostty;
+              #"Mod+Return".spawn-sh = lib.getExe pkgs.kitty;
+
+              # Apps
+              "Mod+E".spawn-sh = lib.getExe pkgs.nautilus;
+              "Mod+B".spawn-sh = lib.getExe pkgs.brave;
+
+              # Core
+              "Mod+S".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call launcher toggle";
+              "Mod+Space".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call controlCenter toggle";
+              "Mod+Comma".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call settings toggle";
+              "Mod+Q".close-window = { };
+
+              # Window & Column Navigation
+              ## Using Arrows
+              "Mod+Left".focus-column-left = { };
+              "Mod+Right".focus-column-right = { };
+              "Mod+Up".focus-window-up = { };
+              "Mod+Down".focus-window-down = { };
+
+              ## Using Vi-keys (HJKL)
+              # "Mod+H".focus-column-left = {};
+              # "Mod+L".focus-column-right = {};
+              # "Mod+K".focus-window-up = {};
+              # "Mod+J".focus-window-down = {};
+
+              "Mod+Home".focus-column-first = { };
+              "Mod+End".focus-column-last = { };
+
+              # Window & Column Movement
+              "Mod+Ctrl+Left".move-column-left = { };
+              "Mod+Ctrl+Right".move-column-right = { };
+              "Mod+Ctrl+Up".move-window-up = { };
+              "Mod+Ctrl+Down".move-window-down = { };
+
+              "Mod+Ctrl+Shift+Down".move-column-to-workspace-down = { };
+              "Mod+Ctrl+Shift+Up".move-column-to-workspace-up = { };
+
+              "Mod+R".switch-preset-column-width = { };
+
+              "Mod+BracketLeft".consume-or-expel-window-left = { };
+              "Mod+BracketRight".consume-or-expel-window-right = { };
+
+              # "Mod+Ctrl+H".move-column-left = {};
+              # "Mod+Ctrl+L".move-column-right = {};
+              # "Mod+Ctrl+K".move-window-up = {};
+              # "Mod+Ctrl+J".move-window-down = {};
+
+              # Move to Workspace
+              "Mod+Ctrl+1".move-column-to-workspace = 1;
+              "Mod+Ctrl+2".move-column-to-workspace = 2;
+              "Mod+Ctrl+3".move-column-to-workspace = 3;
+              "Mod+Ctrl+4".move-column-to-workspace = 4;
+              "Mod+Ctrl+5".move-column-to-workspace = 5;
+              "Mod+Ctrl+6".move-column-to-workspace = 6;
+              "Mod+Ctrl+7".move-column-to-workspace = 7;
+              "Mod+Ctrl+8".move-column-to-workspace = 8;
+              "Mod+Ctrl+9".move-column-to-workspace = 9;
+
+              "Mod+Shift+1".move-window-to-workspace = 1;
+              "Mod+Shift+2".move-window-to-workspace = 2;
+              "Mod+Shift+3".move-window-to-workspace = 3;
+              "Mod+Shift+4".move-window-to-workspace = 4;
+              "Mod+Shift+5".move-window-to-workspace = 5;
+              "Mod+Shift+6".move-window-to-workspace = 6;
+              "Mod+Shift+7".move-window-to-workspace = 7;
+              "Mod+Shift+8".move-window-to-workspace = 8;
+              "Mod+Shift+9".move-window-to-workspace = 9;
+
+              # Monitor Navigation
+              "Mod+Shift+Left".focus-monitor-left = { };
+              "Mod+Shift+Right".focus-monitor-right = { };
+              #"Mod+Shift+Up".focus-monitor-up = {};
+              #"Mod+Shift+Down".focus-monitor-down = {};
+
+              "Mod+Shift+Ctrl+Left".move-column-to-monitor-left = { };
+              "Mod+Shift+Ctrl+Right".move-column-to-monitor-right = { };
+
+              #  Layout & Window Modes
+              "Mod+F".maximize-column = { };
+              "Mod+Shift+F".fullscreen-window = { };
+              "Mod+M".maximize-window-to-edges = { };
+              "Mod+C".center-column = { };
+              "Mod+Minus".set-column-width = "-10%"; # # хз 25 или 10
+              "Mod+Equal".set-column-width = "+10%";
+              "Mod+Shift+Minus".set-window-height = "-10%";
+              "Mod+Shift+Equal".set-window-height = "+10%";
+
+              "Mod+T".toggle-window-floating = { };
+              "Mod+W".toggle-column-tabbed-display = { };
+              "Mod+O".toggle-overview = { };
+
+              "Mod+Shift+T".switch-focus-between-floating-and-tiling = { };
+
+              # Workspace Management
+              "Mod+1".focus-workspace = 1;
+              "Mod+2".focus-workspace = 2;
+              "Mod+3".focus-workspace = 3;
+              "Mod+4".focus-workspace = 4;
+              "Mod+5".focus-workspace = 5;
+              "Mod+6".focus-workspace = 6;
+              "Mod+7".focus-workspace = 7;
+              "Mod+8".focus-workspace = 8;
+              "Mod+9".focus-workspace = 9;
+              "Mod+Tab".focus-workspace-previous = { };
+
+              "Mod+Shift+Up".focus-workspace-up = { };
+              "Mod+Shift+Down".focus-workspace-down = { };
+
+              # Scroll Navigation
+              "Mod+Shift+WheelScrollDown".focus-column-left = { };
+              "Mod+Shift+WheelScrollUp".focus-column-right = { };
+              "Mod+WheelScrollDown".focus-workspace-down = { };
+              "Mod+WheelScrollUp".focus-workspace-up = { };
+
+              # Screenshots
+              "Print".screenshot = { };
+              "Ctrl+Print".screenshot-screen = { };
+              "Alt+Print".screenshot-window = { };
+
+              # Misc
+              "Mod+Shift+Escape".show-hotkey-overlay = { };
+              #"Mod+Shift+P".power-off-monitors = {};
+              "Ctrl+Alt+Delete".quit = { };
+              "Super+Shift+Q".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call sessionMenu toggle";
+
+              # Media
+              "XF86AudioRaiseVolume".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume increase";
+              "XF86AudioLowerVolume".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume decrease";
+              "XF86AudioMute".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume muteOutput";
+
+              # Media Player Controls
+              "XF86AudioPlay".spawn-sh = "${lib.getExe pkgs.playerctl} play-pause";
+              "XF86AudioNext".spawn-sh = "${lib.getExe pkgs.playerctl} next";
+              "XF86AudioPrev".spawn-sh = "${lib.getExe pkgs.playerctl} previous";
+
+              # Brightness
+              #"XF86MonBrightnessUp".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call brightness increase";
+              #"XF86MonBrightnessDown".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call brightness decrease";
             }
-          }
-
-          prefer-no-csd
-
-          binds {
-            // Terminal
-            Mod+Return { ${spawn (lib.getExe pkgs.ghostty)} }
-            // Mod+Return { ${spawn (lib.getExe pkgs.kitty)} }
-
-            // Apps
-            Mod+E { ${spawn (lib.getExe pkgs.nautilus)} }
-            Mod+B { ${spawn (lib.getExe pkgs.brave)} }
-
-            // Core
-            Mod+S { ${spawn "${noctalia} msg panel-toggle launcher"} }
-            Mod+Space { ${spawn "${noctalia} msg panel-toggle control-center"} }
-            Mod+Comma { ${spawn "${noctalia} msg settings-open"} }
-            Mod+Q { close-window; }
-
-            // Window & Column Navigation
-            // Using Arrows
-            Mod+Left { focus-column-left; }
-            Mod+Right { focus-column-right; }
-            Mod+Up { focus-window-up; }
-            Mod+Down { focus-window-down; }
-
-            // Using Vi-keys (HJKL)
-            // Mod+H { focus-column-left; }
-            // Mod+L { focus-column-right; }
-            // Mod+K { focus-window-up; }
-            // Mod+J { focus-window-down; }
-
-            Mod+Home { focus-column-first; }
-            Mod+End { focus-column-last; }
-
-            // Window & Column Movement
-            Mod+Ctrl+Left { move-column-left; }
-            Mod+Ctrl+Right { move-column-right; }
-            Mod+Ctrl+Up { move-window-up; }
-            Mod+Ctrl+Down { move-window-down; }
-            Mod+Ctrl+Shift+Down { move-column-to-workspace-down; }
-            Mod+Ctrl+Shift+Up { move-column-to-workspace-up; }
-
-            Mod+R { switch-preset-column-width; }
-            Mod+BracketLeft { consume-or-expel-window-left; }
-            Mod+BracketRight { consume-or-expel-window-right; }
-
-            // Mod+Ctrl+H { move-column-left; }
-            // Mod+Ctrl+L { move-column-right; }
-            // Mod+Ctrl+K { move-window-up; }
-            // Mod+Ctrl+J { move-window-down; }
-
-            // Move to Workspace
-            Mod+Ctrl+1 { move-column-to-workspace 1; }
-            Mod+Ctrl+2 { move-column-to-workspace 2; }
-            Mod+Ctrl+3 { move-column-to-workspace 3; }
-            Mod+Ctrl+4 { move-column-to-workspace 4; }
-            Mod+Ctrl+5 { move-column-to-workspace 5; }
-            Mod+Ctrl+6 { move-column-to-workspace 6; }
-            Mod+Ctrl+7 { move-column-to-workspace 7; }
-            Mod+Ctrl+8 { move-column-to-workspace 8; }
-            Mod+Ctrl+9 { move-column-to-workspace 9; }
-
-            Mod+Shift+1 { move-window-to-workspace 1; }
-            Mod+Shift+2 { move-window-to-workspace 2; }
-            Mod+Shift+3 { move-window-to-workspace 3; }
-            Mod+Shift+4 { move-window-to-workspace 4; }
-            Mod+Shift+5 { move-window-to-workspace 5; }
-            Mod+Shift+6 { move-window-to-workspace 6; }
-            Mod+Shift+7 { move-window-to-workspace 7; }
-            Mod+Shift+8 { move-window-to-workspace 8; }
-            Mod+Shift+9 { move-window-to-workspace 9; }
-
-            // Monitor Navigation
-            Mod+Shift+Left { focus-monitor-left; }
-            Mod+Shift+Right { focus-monitor-right; }
-            // Mod+Shift+Up { focus-monitor-up; }
-            // Mod+Shift+Down { focus-monitor-down; }
-
-            Mod+Shift+Ctrl+Left { move-column-to-monitor-left; }
-            Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
-
-            // Layout & Window Modes
-            Mod+F { maximize-column; }
-            Mod+Shift+F { fullscreen-window; }
-            Mod+M { maximize-window-to-edges; }
-            Mod+C { center-column; }
-            Mod+Minus { set-column-width "-10%"; } // # хз 25 или 10
-            Mod+Equal { set-column-width "+10%"; }
-            Mod+Shift+Minus { set-window-height "-10%"; }
-            Mod+Shift+Equal { set-window-height "+10%"; }
-
-            Mod+T { toggle-window-floating; }
-            Mod+W { toggle-column-tabbed-display; }
-            Mod+O { toggle-overview; }
-            Mod+Shift+T { switch-focus-between-floating-and-tiling; }
-
-            // Workspace Management
-            Mod+1 { focus-workspace 1; }
-            Mod+2 { focus-workspace 2; }
-            Mod+3 { focus-workspace 3; }
-            Mod+4 { focus-workspace 4; }
-            Mod+5 { focus-workspace 5; }
-            Mod+6 { focus-workspace 6; }
-            Mod+7 { focus-workspace 7; }
-            Mod+8 { focus-workspace 8; }
-            Mod+9 { focus-workspace 9; }
-            Mod+Tab { focus-workspace-previous; }
-            Mod+Shift+Up { focus-workspace-up; }
-            Mod+Shift+Down { focus-workspace-down; }
-
-            // Scroll Navigation
-            Mod+Shift+WheelScrollDown { focus-column-left; }
-            Mod+Shift+WheelScrollUp { focus-column-right; }
-            Mod+WheelScrollDown { focus-workspace-down; }
-            Mod+WheelScrollUp { focus-workspace-up; }
-
-            // Screenshots
-            Print { screenshot; }
-            Ctrl+Print { screenshot-screen; }
-            Alt+Print { screenshot-window; }
-
-            // Misc
-            Mod+Shift+Escape { show-hotkey-overlay; }
-            // Mod+Shift+P { power-off-monitors; }
-            Ctrl+Alt+Delete { quit; }
-            Super+Shift+Q { ${spawn "${noctalia} msg panel-toggle session"} }
-
-            // Media
-            XF86AudioRaiseVolume { ${spawn "${noctalia} msg volume-up"} }
-            XF86AudioLowerVolume { ${spawn "${noctalia} msg volume-down"} }
-            XF86AudioMute { ${spawn "${noctalia} msg volume-mute"} }
-
-            // Media Player Controls
-            XF86AudioPlay { ${spawn "${lib.getExe pkgs.playerctl} play-pause"} }
-            XF86AudioNext { ${spawn "${lib.getExe pkgs.playerctl} next"} }
-            XF86AudioPrev { ${spawn "${lib.getExe pkgs.playerctl} previous"} }
-
-            // Brightness
-            // XF86MonBrightnessUp { ${spawn "${noctalia} msg brightness-up"} }
-            // XF86MonBrightnessDown { ${spawn "${noctalia} msg brightness-down"} }
-
-            ${extraBinds}
-            ${monitorBinds}
-          }
-
-          ${extraConfig}
-          ${commonExtraConfig}
-        '';
-
-      amaterasuConfig = commonConfig {
-        startup = [
-          noctalia
+            // extraBinds
+            // monitorBinds;
+          };
+        };
+    in
+    {
+      packages.myNiri-Amaterasu = mkNiri {
+        spawn-at-startup = [
+          (lib.getExe pkgs.noctalia-shell)
           braveSmartDelay
           "spotify"
           vesktopDelay
           (lib.getExe pkgs.telegram-desktop)
           (lib.getExe pkgs.fractal)
         ];
+
         extraConfig = ''
           workspace "web" {
             open-on-output "DP-1"
-          }
-
+          };
           workspace "social" {
             open-on-output "DP-3"
-          }
-
+          };
           workspace "music" {
             open-on-output "DP-3"
-          }
+          };
 
           output "DP-1" {
             mode "2560x1440@164.999"
-          }
+          };
         '';
-        monitorBinds = ''
-          Mod+Alt+1 { focus-monitor "DP-1"; }
-          Mod+Alt+2 { focus-monitor "DP-3"; }
-        '';
+
+        monitorBinds = {
+          "Mod+Alt+1".focus-monitor = "DP-1";
+          "Mod+Alt+2".focus-monitor = "DP-3";
+        };
       };
 
-      tsukuyomiConfig = commonConfig {
-        startup = [
-          noctalia
+      packages.myNiri-Tsukuyomi = mkNiri {
+        spawn-at-startup = [
+          (lib.getExe pkgs.noctalia-shell)
           braveSmartDelay
           vesktopDelay
           (lib.getExe pkgs.telegram-desktop)
           (lib.getExe pkgs.fractal)
           "spotify"
         ];
+
         extraConfig = ''
           workspace "web" {
             open-on-output "eDP-1"
-          }
-
+          };
           workspace "social" {
             open-on-output "eDP-1"
-          }
-
+          };
           workspace "music" {
             open-on-output "eDP-1"
-          }
+          };
 
           output "eDP-1" {
             mode "1920x1080@60.001"
-          }
+          };
         '';
-        touchpadConfig = ''
-          touchpad {
-            natural-scroll
-            tap
-          }
-        '';
-        extraBinds = ''
-          XF86AudioMicMute { ${spawn tsukuyomiMuteInput} }
-          XF86MonBrightnessUp { ${spawn "${noctalia} msg brightness-up"} }
-          XF86MonBrightnessDown { ${spawn "${noctalia} msg brightness-down"} }
-        '';
+
+        inputSettings = {
+          touchpad = {
+            natural-scroll = _: { };
+            tap = _: { };
+          };
+        };
+
+        extraBinds = {
+          "XF86AudioMicMute".spawn-sh = tsukuyomiMuteInput;
+          "XF86MonBrightnessUp".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call brightness increase";
+          "XF86MonBrightnessDown".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call brightness decrease";
+        };
       };
-    in
-    {
-      imports = [
-        inputs.niri.nixosModules.niri
-      ];
-
-      nixpkgs.overlays = [
-        inputs.niri.overlays.niri
-      ];
-
-      programs.niri = {
-        enable = true;
-        package = pkgs.niri-unstable;
-      };
-
-      home-manager.users.${username}.programs.niri.config =
-        if config.networking.hostName == "Amaterasu" then
-          amaterasuConfig
-        else if config.networking.hostName == "Tsukuyomi" then
-          tsukuyomiConfig
-        else
-          throw "No niri config defined for host ${config.networking.hostName}";
     };
 }
