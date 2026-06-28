@@ -27,6 +27,14 @@
     {
       environment.systemPackages = [ tidy-sddm-gruvbox-dark ];
 
+      system.activationScripts.sddmUserFaces.text = ''
+        if [ -e /home/izanagi/.face ]; then
+          ${pkgs.coreutils}/bin/install -Dm0644 \
+            /home/izanagi/.face \
+            /var/lib/sddm/faces/izanagi.face.icon
+        fi
+      '';
+
       services.displayManager = {
         defaultSession = "niri";
 
@@ -34,6 +42,7 @@
           enable = true;
           wayland.enable = true;
           theme = "tidy-sddm";
+          settings.Theme.FacesDir = "/var/lib/sddm/faces";
           extraPackages = with pkgs.kdePackages; [
             qtsvg
             qtdeclarative
