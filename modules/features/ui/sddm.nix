@@ -18,7 +18,7 @@
           chmod -R u+w $out/share/sddm/themes/tidy-sddm
 
           substituteInPlace $out/share/sddm/themes/tidy-sddm/theme.conf \
-            --replace-fail "palette=Blender" "palette=Gruvbox Dark"
+            --replace-fail "palette=Breeze Dark" "palette=Gruvbox Dark"
 
           runHook postInstall
         '';
