@@ -126,6 +126,8 @@
 
         window-rule {
           match app-id="spotify"
+          match app-id="Spotify"
+          match app-id="com.spotify.Client"
           open-on-workspace "music"
           open-maximized true
         };
