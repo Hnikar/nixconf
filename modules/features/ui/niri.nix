@@ -19,12 +19,20 @@
 
   perSystem =
     {
-      pkgs,
       lib,
       self',
+      system,
       ...
     }:
     let
+      pkgs = import inputs.nixpkgs {
+        inherit system;
+        config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+          "replace"
+        ];
+      };
+      noctalia = inputs.noctalia.packages.${system}.default;
+
       braveSmartDelay = lib.getExe (
         pkgs.writeShellScriptBin "brave-smart-delay" ''
           count=0
@@ -189,9 +197,9 @@
               "Mod+B".spawn-sh = lib.getExe pkgs.brave;
 
               # Core
-              "Mod+S".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call launcher toggle";
-              "Mod+Space".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call controlCenter toggle";
-              "Mod+Comma".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call settings toggle";
+              "Mod+S".spawn-sh = "${lib.getExe noctalia} msg panel-toggle launcher";
+              "Mod+Space".spawn-sh = "${lib.getExe noctalia} msg panel-toggle control-center";
+              "Mod+Comma".spawn-sh = "${lib.getExe noctalia} msg settings-open";
               "Mod+Q".close-window = { };
 
               # Window & Column Navigation
@@ -305,12 +313,12 @@
               "Mod+Shift+Escape".show-hotkey-overlay = { };
               #"Mod+Shift+P".power-off-monitors = {};
               "Ctrl+Alt+Delete".quit = { };
-              "Super+Shift+Q".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call sessionMenu toggle";
+              "Super+Shift+Q".spawn-sh = "${lib.getExe noctalia} msg panel-toggle session";
 
               # Media
-              "XF86AudioRaiseVolume".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume increase";
-              "XF86AudioLowerVolume".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume decrease";
-              "XF86AudioMute".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call volume muteOutput";
+              "XF86AudioRaiseVolume".spawn-sh = "${lib.getExe noctalia} msg volume-up";
+              "XF86AudioLowerVolume".spawn-sh = "${lib.getExe noctalia} msg volume-down";
+              "XF86AudioMute".spawn-sh = "${lib.getExe noctalia} msg volume-mute";
 
               # Media Player Controls
               "XF86AudioPlay".spawn-sh = "${lib.getExe pkgs.playerctl} play-pause";
@@ -318,8 +326,8 @@
               "XF86AudioPrev".spawn-sh = "${lib.getExe pkgs.playerctl} previous";
 
               # Brightness
-              #"XF86MonBrightnessUp".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call brightness increase";
-              #"XF86MonBrightnessDown".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call brightness decrease";
+              #"XF86MonBrightnessUp".spawn-sh = "${lib.getExe noctalia} msg brightness-up";
+              #"XF86MonBrightnessDown".spawn-sh = "${lib.getExe noctalia} msg brightness-down";
             }
             // extraBinds
             // monitorBinds;
@@ -329,7 +337,7 @@
     {
       packages.myNiri-Amaterasu = mkNiri {
         spawn-at-startup = [
-          (lib.getExe pkgs.noctalia-shell)
+          (lib.getExe noctalia)
           braveSmartDelay
           "spotify"
           vesktopDelay
@@ -361,7 +369,7 @@
 
       packages.myNiri-Tsukuyomi = mkNiri {
         spawn-at-startup = [
-          (lib.getExe pkgs.noctalia-shell)
+          (lib.getExe noctalia)
           braveSmartDelay
           vesktopDelay
           (lib.getExe pkgs.telegram-desktop)
@@ -394,8 +402,8 @@
 
         extraBinds = {
           "XF86AudioMicMute".spawn-sh = tsukuyomiMuteInput;
-          "XF86MonBrightnessUp".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call brightness increase";
-          "XF86MonBrightnessDown".spawn-sh = "${lib.getExe pkgs.noctalia-shell} ipc call brightness decrease";
+          "XF86MonBrightnessUp".spawn-sh = "${lib.getExe noctalia} msg brightness-up";
+          "XF86MonBrightnessDown".spawn-sh = "${lib.getExe noctalia} msg brightness-down";
         };
       };
     };
