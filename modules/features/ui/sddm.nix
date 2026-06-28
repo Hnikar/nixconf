@@ -16,8 +16,9 @@
           mkdir -p $out/share/sddm/themes/tidy-sddm
           cp -r . $out/share/sddm/themes/tidy-sddm
           chmod -R u+w $out/share/sddm/themes/tidy-sddm
+
           substituteInPlace $out/share/sddm/themes/tidy-sddm/theme.conf \
-            --replace-fail "palette=Breeze Dark" "palette=Gruvbox Dark"
+            --replace-fail "palette=Blender" "palette=Gruvbox Dark"
 
           runHook postInstall
         '';
@@ -33,7 +34,10 @@
           enable = true;
           wayland.enable = true;
           theme = "tidy-sddm";
-          extraPackages = [ pkgs.kdePackages.qtsvg ];
+          extraPackages = with pkgs.kdePackages; [
+            qtsvg
+            qtdeclarative
+          ];
         };
       };
     };
