@@ -21,11 +21,6 @@
 
     distro-grub-themes.url = "github:AdisonCavani/distro-grub-themes";
 
-    tidy-sddm = {
-      url = "github:loadfred/tidy-sddm/v0.4";
-      flake = false;
-    };
-
     noctalia = {
       url = "github:noctalia-dev/noctalia/legacy-v4";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -49,6 +44,12 @@
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
+
+    ## Non-flakes
+    tidy-sddm = {
+      url = "github:loadfred/tidy-sddm/v0.4";
+      flake = false;
+    };
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
