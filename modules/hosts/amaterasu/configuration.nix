@@ -32,6 +32,7 @@
       # Desktop / UI
       self.nixosModules.niri
       self.nixosModules.noctalia
+      self.nixosModules.sddm
 
       # User / Home Manager
       self.nixosModules.homeManager
@@ -90,11 +91,6 @@
       ];
       packages = with pkgs; [];
     };
-
-    # Display manager
-    services.displayManager.gdm.enable = true;
-    #services.displayManager.autoLogin.enable = true;
-    #services.displayManager.autoLogin.user = "izanagi";
 
     # Home Manager
     home-manager.users.izanagi = {pkgs, ...}: {
