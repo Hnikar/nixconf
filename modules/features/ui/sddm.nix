@@ -28,9 +28,9 @@
       environment.systemPackages = [ tidy-sddm-gruvbox-dark ];
 
       system.activationScripts.sddmUserFaces.text = ''
-        if [ -e /home/izanagi/.face ]; then
+        if [ -e /home/izanagi/.face.icon ]; then
           ${pkgs.coreutils}/bin/install -Dm0644 \
-            /home/izanagi/.face \
+            /home/izanagi/.face.icon \
             /var/lib/sddm/faces/izanagi.face.icon
         fi
       '';
