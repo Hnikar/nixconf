@@ -21,6 +21,11 @@
 
     distro-grub-themes.url = "github:AdisonCavani/distro-grub-themes";
 
+    tidy-sddm = {
+      url = "github:loadfred/tidy-sddm/v0.4";
+      flake = false;
+    };
+
     noctalia = {
       url = "github:noctalia-dev/noctalia/legacy-v4";
       inputs.nixpkgs.follows = "nixpkgs";

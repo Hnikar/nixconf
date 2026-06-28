@@ -551,6 +551,7 @@
         "noctalia": "noctalia",
         "nvf": "nvf",
         "spicetify-nix": "spicetify-nix",
+        "tidy-sddm": "tidy-sddm",
         "wrapper-modules": "wrapper-modules"
       }
     },
@@ -645,6 +646,23 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "tidy-sddm": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1731628116,
+        "narHash": "sha256-CJ6IKW2Wrv/pgERKq2mfl+OeN1WUaIQV1mOpVMEGsC0=",
+        "owner": "loadfred",
+        "repo": "tidy-sddm",
+        "rev": "8f0111624370a9f3aa58b47b3acce1690ade3d46",
+        "type": "github"
+      },
+      "original": {
+        "owner": "loadfred",
+        "ref": "v0.4",
+        "repo": "tidy-sddm",
         "type": "github"
       }
     },
