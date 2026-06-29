@@ -27,7 +27,7 @@
         # Desktop / UI
         self.nixosModules.niri
         self.nixosModules.noctalia
-        self.nixosModules.ttyNiri
+        self.nixosModules.sddm
 
         # User / Home Manager
         self.nixosModules.homeManager
