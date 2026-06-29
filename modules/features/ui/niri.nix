@@ -363,20 +363,10 @@
         spawn-at-startup = [
           (lib.getExe pkgs.noctalia-shell)
           braveSmartDelay
-          vesktopDelay
-          (lib.getExe pkgs.telegram-desktop)
-          (lib.getExe pkgs.fractal)
-          "spotify"
         ];
 
         extraConfig = ''
           workspace "web" {
-            open-on-output "eDP-1"
-          };
-          workspace "social" {
-            open-on-output "eDP-1"
-          };
-          workspace "music" {
             open-on-output "eDP-1"
           };
 
