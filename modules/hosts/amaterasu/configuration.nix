@@ -192,9 +192,6 @@
 
         # Security
         proton-vpn
-
-        # Misc
-        codex
       ];
       xdg.terminal-exec.enable = true;
 
