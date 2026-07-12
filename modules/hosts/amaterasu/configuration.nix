@@ -56,7 +56,15 @@
 
       # Networking
       networking.hostName = "Amaterasu";
-      networking.networkmanager.enable = true;
+      networking.networkmanager = {
+        enable = true;
+        wifi = {
+          powersave = false;
+          macAddress = "stable-ssid";
+          scanRandMacAddress = false;
+          backend = "iwd";
+        };
+      };
 
       networking.interfaces."enp8s0".ipv4.addresses = [
         {
@@ -185,6 +193,7 @@
         prismlauncher
         rimsort
         nixfmt
+        vlc
 
         # Productivity
         onlyoffice-desktopeditors
@@ -192,6 +201,10 @@
 
         # Security
         proton-vpn
+
+        # Misc
+        smartmontools
+        ntfs3g
       ];
       xdg.terminal-exec.enable = true;
 
