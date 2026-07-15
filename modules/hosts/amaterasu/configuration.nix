@@ -26,6 +26,7 @@
         self.nixosModules.containerTools
         self.nixosModules.razer
         self.nixosModules.appimage
+        self.nixosModules.networking
         self.nixosModules.pipewire
         self.nixosModules.flatpak
 
@@ -56,15 +57,6 @@
 
       # Networking
       networking.hostName = "Amaterasu";
-      networking.networkmanager = {
-        enable = true;
-        wifi = {
-          powersave = false;
-          macAddress = "stable-ssid";
-          scanRandMacAddress = false;
-          backend = "iwd";
-        };
-      };
 
       networking.interfaces."enp8s0".ipv4.addresses = [
         {

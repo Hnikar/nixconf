@@ -18,6 +18,7 @@
         #self.nixosModules.containerTools
         #self.nixosModules.razer
         self.nixosModules.appimage
+        self.nixosModules.networking
         self.nixosModules.pipewire
         self.nixosModules.flatpak
 
@@ -56,7 +57,6 @@
 
       # Networking
       networking.hostName = "Tsukuyomi";
-      networking.networkmanager.enable = true;
 
       services.tailscale.enable = true;
 
