@@ -40,14 +40,7 @@
 
       # System packages
       environment.systemPackages = with pkgs; [
-        # Productivity
-        nixfmt
-        onlyoffice-desktopeditors
-
-        # Security
-        proton-vpn
-
-        chromium
+        # Misc
       ];
 
       users.users.nozuchi.description = "Nozuchi";
