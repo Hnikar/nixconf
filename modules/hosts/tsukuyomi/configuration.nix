@@ -195,6 +195,8 @@
 
         # Security
         proton-vpn
+
+        chromium
       ];
       xdg.terminal-exec.enable = true;
 
