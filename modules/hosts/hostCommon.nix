@@ -138,6 +138,7 @@
         ghostty
         neovim
         yazi
+        codex
 
         # System Utilities
         btrfs-assistant
