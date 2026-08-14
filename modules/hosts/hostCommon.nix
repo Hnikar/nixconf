@@ -124,6 +124,11 @@
             // lib.optionalAttrs foundryIcon.success {
               icon = "${foundryIcon.value}";
             };
+
+          xdg.desktopEntries.keychron-launcher = {
+            name = "Keychron Launcher";
+            exec = "${lib.getExe pkgs.brave} --app=https://launcher.keychron.com/";
+          };
         };
 
       # System packages
