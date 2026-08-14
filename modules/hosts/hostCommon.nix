@@ -150,6 +150,7 @@
         wget
         zip
         efibootmgr
+        ffmpeg
 
         # Media
         foliate
