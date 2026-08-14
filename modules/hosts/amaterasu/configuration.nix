@@ -20,7 +20,6 @@
         # Services and hardware helpers
         self.nixosModules.openTabletDriver
         self.nixosModules.containerTools
-        self.nixosModules.razer
 
         # App suites
         self.nixosModules.gaming
