@@ -152,6 +152,7 @@
         zip
         efibootmgr
         ffmpeg
+        usbutils
 
         # Media
         foliate
@@ -164,6 +165,17 @@
         proton-vpn
       ];
       xdg.terminal-exec.enable = true;
+
+      # udev rules
+      services.udev.extraRules = ''
+        SUBSYSTEM=="usb", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="d064", MODE="0666", GROUP="users"
+        SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="d064", MODE="0666", GROUP="users"
+
+        SUBSYSTEM=="hidraw", KERNELS=="*3434:0361*", MODE="0666", GROUP="users"
+
+        SUBSYSTEM=="usb", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="d026", MODE="0666", GROUP="users"
+        SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="d026", MODE="0666", GROUP="users"
+      '';
 
       # Misc services
       services.gvfs.enable = true;
