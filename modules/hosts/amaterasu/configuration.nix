@@ -23,6 +23,9 @@
 
         # App suites
         self.nixosModules.gaming
+
+        # Misc
+        self.nixosModules.creamlinux
       ];
 
       # Networking
