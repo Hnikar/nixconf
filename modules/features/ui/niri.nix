@@ -294,17 +294,15 @@
               "Mod+Shift+WheelScrollDown".focus-column-left = { };
               "Mod+Shift+WheelScrollUp".focus-column-right = { };
 
-              "Mod+Shift+WheelScrollLeft".focus-column-left = { };
-              "Mod+Shift+WheelScrollRight".focus-column-right = { };
+              ## Horizontal Scroll Navigation
+              "Mod+WheelScrollLeft".focus-column-left = { };
+              "Mod+WheelScrollRight".focus-column-right = { };
 
               "Mod+Ctrl+WheelScrollLeft".focus-monitor-left = { };
               "Mod+Ctrl+WheelScrollRight".focus-monitor-right = { };
 
               "Mod+WheelScrollDown".focus-workspace-down = { };
               "Mod+WheelScrollUp".focus-workspace-up = { };
-
-              "Mod+WheelScrollLeft".focus-workspace-down = { };
-              "Mod+WheelScrollRight".focus-workspace-up = { };
 
               # Screenshots
               "Print".screenshot = { };
