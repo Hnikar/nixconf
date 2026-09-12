@@ -14,6 +14,8 @@
           pkgs.libxcrypt-legacy
           pkgs.python312
           pkgs.libepoxy
+          pkgs.zstd
+          pkgs.libxkbfile
         ];
       };
     };
