@@ -46,7 +46,6 @@
         obs-studio
         osu-lazer-bin
         prismlauncher
-        rimsort
         vlc
 
         # Productivity
