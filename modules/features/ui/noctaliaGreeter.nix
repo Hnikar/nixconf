@@ -7,7 +7,7 @@
         inputs.noctalia-greeter.nixosModules.default
       ];
 
-      programs.noctalia-greeter = {
+      services.displayManager."noctalia-greeter" = {
         enable = lib.mkDefault true;
         settings = lib.mkDefault {
           session.default = "niri";
