@@ -2,18 +2,87 @@
 {
   flake.nixosModules.defaultApps =
     { pkgs, username, ... }:
+    let
+      urlRules = [
+        {
+          name = "steam";
+
+          patterns = [
+            ''^https?://(store\.)?steampowered\.com/''
+            ''^https?://steamcommunity\.com/''
+          ];
+
+          command = "${pkgs.steam}/bin/steam";
+          transform = "steam://openurl/$url";
+        }
+
+        {
+          name = "spotify";
+          patterns = [
+            ''^https?://open\.spotify\.com/''
+          ];
+          command = "${pkgs.spotify}/bin/spotify";
+        }
+      ];
+
+      regex-url-handler = pkgs.writeShellScriptBin "regex-url-handler" ''
+                set -euo pipefail
+
+                url="''${1:-}"
+
+                if [[ -z "$url" ]]; then
+                  exit 1
+                fi
+        ${builtins.concatStringsSep "\n" (
+          builtins.concatMap (
+            rule:
+            map (pattern: ''
+              if [[ "$url" =~ ${pattern} ]]; then
+                exec ${rule.command} "${rule.transform or "$url"}"
+              fi
+            '') rule.patterns
+          ) urlRules
+        )}
+
+                # Everything that doesn't match a special application
+                # is opened by the normal browser.
+                exec ${pkgs.brave}/bin/brave "$url"
+      '';
+    in
     {
       home-manager.users.${username} = {
+        home.packages = [
+          regex-url-handler
+        ];
+
+        xdg.desktopEntries.regex-url-handler = {
+          name = "Regex URL Handler";
+          exec = "${regex-url-handler}/bin/regex-url-handler %u";
+          terminal = false;
+          type = "Application";
+          categories = [ "Network" ];
+
+          mimeType = [
+            "x-scheme-handler/http"
+            "x-scheme-handler/https"
+          ];
+        };
+
         xdg.mimeApps = {
           enable = true;
+
           defaultApplications = {
             "inode/directory" = "org.gnome.Nautilus.desktop";
+
             "application/xhtml+xml" = "brave-browser.desktop";
             "text/html" = "brave-browser.desktop";
+
             "x-scheme-handler/about" = "brave-browser.desktop";
-            "x-scheme-handler/http" = "brave-browser.desktop";
-            "x-scheme-handler/https" = "brave-browser.desktop";
+            "x-scheme-handler/http" = "regex-url-handler.desktop";
+            "x-scheme-handler/https" = "regex-url-handler.desktop";
             "x-scheme-handler/unknown" = "brave-browser.desktop";
+
+            "x-scheme-handler/steam" = "steam.desktop";
 
             "application/pdf" = "org.gnome.Papers.desktop";
             "application/epub+zip" = "com.github.johnfactotum.Foliate.desktop";
