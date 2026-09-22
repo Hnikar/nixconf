@@ -6,7 +6,13 @@
 
     import-tree.url = "github:vic/import-tree";
 
-    niri.url = "github:sodiboo/niri-flake";
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.niri-unstable = {
+        url = "github:niri-wm/niri";
+        flake = false;
+      };
+    };
 
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
 

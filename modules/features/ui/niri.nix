@@ -76,6 +76,10 @@
 
       commonExtraConfig = ''
         window-rule {
+          on-xdg-activate "focus"
+        };
+
+        window-rule {
           match app-id="steam" title="^notificationtoasts_\\d+_desktop$"
           default-floating-position x=10 y=10 relative-to="bottom-right"
           open-focused false
@@ -151,6 +155,7 @@
         }:
         inputs.wrapper-modules.wrappers.niri.wrap {
           inherit pkgs;
+          package = (pkgs.extend inputs.niri.overlays.niri).niri-unstable;
 
           settings = {
             inherit spawn-at-startup;
