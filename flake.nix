@@ -2,28 +2,17 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/26.05";
 
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     import-tree.url = "github:vic/import-tree";
-
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.niri-unstable = {
-        url = "github:niri-wm/niri";
-        flake = false;
-      };
-    };
 
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
 
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
 
     millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
-
-    creamlinux-installer = {
-      url = "github:Novattz/creamlinux-installer";
-      flake = false;
-    };
 
     distro-grub-themes.url = "github:AdisonCavani/distro-grub-themes";
 
@@ -56,9 +45,21 @@
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
 
-    ## Non-flakes
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.niri-unstable = {
+        url = "github:niri-wm/niri";
+        flake = false;
+      };
+    };
+
     tidy-sddm = {
       url = "github:loadfred/tidy-sddm/v0.4";
+      flake = false;
+    };
+
+    creamlinux-installer = {
+      url = "github:Novattz/creamlinux-installer";
       flake = false;
     };
   };
