@@ -22,9 +22,15 @@
       pkgs,
       lib,
       self',
+      system,
       ...
     }:
     let
+      pkgs-unstable = import inputs.nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
+
       braveSmartDelay = lib.getExe (
         pkgs.writeShellScriptBin "brave-smart-delay" ''
           count=0
@@ -43,7 +49,7 @@
       vesktopDelay = lib.getExe (
         pkgs.writeShellScriptBin "vesktop-delay" ''
           sleep 5
-          exec ${lib.getExe pkgs.vesktop}
+          exec ${lib.getExe pkgs-unstable.vesktop}
         ''
       );
 
