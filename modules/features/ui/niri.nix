@@ -79,12 +79,10 @@
           fi
         ''
       );
-
+      # window-rule {
+      #   on-xdg-activate "focus"
+      # };
       commonExtraConfig = ''
-        window-rule {
-          on-xdg-activate "focus"
-        };
-
         window-rule {
           match app-id="steam" title="^notificationtoasts_\\d+_desktop$"
           default-floating-position x=10 y=10 relative-to="bottom-right"
