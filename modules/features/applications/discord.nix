@@ -1,7 +1,10 @@
-{ self, inputs, ... }: {
-  flake.nixosModules.discord = {pkgs, ...}: {
-      environment.systemPackages = with pkgs; [
+{ self, inputs, ... }:
+{
+  flake.nixosModules.discord =
+    { pkgs-unstable, ... }:
+    {
+      environment.systemPackages = with pkgs-unstable; [
         vesktop
       ];
-  };
+    };
 }
