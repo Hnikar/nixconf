@@ -31,6 +31,17 @@
       # Networking
       networking.hostName = "Amaterasu";
 
+      networking.networkmanager.ensureProfiles.profiles.wired = {
+        connection = {
+          id = "Wired";
+          type = "ethernet";
+          interface-name = "enp8s0";
+          autoconnect = "true";
+        };
+        ipv4.method = "auto";
+        ipv6.method = "auto";
+      };
+
       networking.interfaces."enp8s0".ipv4.addresses = [
         {
           address = "192.168.69.2";
