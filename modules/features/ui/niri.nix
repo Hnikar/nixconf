@@ -4,16 +4,26 @@
     {
       config,
       pkgs,
+      lib,
       ...
     }:
     let
       system = pkgs.stdenv.hostPlatform.system;
       packageName = "myNiri-${config.networking.hostName}";
+      niriNotifyFocus = self.packages.${system}.niri-notify-focus;
     in
     {
       programs.niri = {
         enable = true;
         package = self.packages.${system}.${packageName};
+      };
+
+      systemd.user.services.niri-notify-focus = {
+        description = "Focus source window on notification activation";
+        wantedBy = [ "graphical-session.target" ];
+        partOf = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig = { ExecStart = lib.getExe niriNotifyFocus; Restart = "on-failure"; RestartSec = 5; };
       };
     };
 
@@ -29,6 +39,20 @@
       pkgs-unstable = import inputs.nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
+      };
+
+      niriNotifyFocus = let
+        python = pkgs.python3.withPackages (ps: [ ps.dbus-python ps.pygobject3 ]);
+        source = pkgs.fetchFromGitHub { owner = "Oaklight"; repo = "niri-notify-focus"; rev = "v0.2.1"; hash = "sha256-POaBIo5k4ukVTuDxaVqnc2Z+D1wk0DB6ny6U1CbaCB4="; };
+      in pkgs.stdenvNoCC.mkDerivation {
+        pname = "niri-notify-focus"; version = "0.2.1"; src = source; nativeBuildInputs = [ pkgs.makeWrapper ]; dontBuild = true;
+        installPhase = ''
+          install -Dm755 niri-notify-focus $out/libexec/niri-notify-focus
+          makeWrapper ${python}/bin/python $out/bin/niri-notify-focus --add-flags $out/libexec/niri-notify-focus
+          install -Dm644 LICENSE $out/share/licenses/niri-notify-focus/LICENSE
+          install -Dm644 config.toml.example $out/share/doc/niri-notify-focus/config.toml.example
+        '';
+        meta = { description = "Focus source window on notification activation in niri"; homepage = "https://github.com/Oaklight/niri-notify-focus"; license = lib.licenses.mit; mainProgram = "niri-notify-focus"; platforms = lib.platforms.linux; };
       };
 
       braveSmartDelay = lib.getExe (
@@ -344,6 +368,8 @@
         };
     in
     {
+      packages.niri-notify-focus = niriNotifyFocus;
+
       packages.myNiri-Amaterasu = mkNiri {
         spawn-at-startup = [
           (lib.getExe pkgs.noctalia-shell)
