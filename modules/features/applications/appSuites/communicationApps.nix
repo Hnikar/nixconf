@@ -6,7 +6,7 @@
       environment.systemPackages = with pkgs; [
         fractal
         mumble
-        signal-desktop
+        # signal-desktop
         telegram-desktop
       ];
     };
