@@ -12,5 +12,9 @@
           backend = "iwd";
         };
       };
+      programs.winbox = {
+        enable = true;
+        openFirewall = true;
+      };
     };
 }
