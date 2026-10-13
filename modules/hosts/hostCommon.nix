@@ -158,6 +158,7 @@
         efibootmgr
         ffmpeg
         usbutils
+        jdk
 
         # Media
         foliate
