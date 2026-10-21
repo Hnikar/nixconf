@@ -29,8 +29,11 @@
       ];
 
       # Networking
-      networking.hostName = "Amaterasu";
-      networking.timeServers = [ "192.168.88.1" ];
+      networking = {
+        hostName = "Amaterasu";
+        timeServers = [ "192.168.88.1" ];
+        nameservers = [ "192.168.88.1" ];
+      };
 
       # System packages
       environment.systemPackages = with pkgs; [
@@ -42,7 +45,7 @@
         prismlauncher
         vlc
 
-        # Productivity
+        # Misc
         qbittorrent
       ];
 
