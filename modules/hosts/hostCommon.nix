@@ -3,6 +3,7 @@
   flake.nixosModules.hostCommon =
     {
       pkgs,
+      pkgs-unstable,
       lib,
       username,
       ...
@@ -44,7 +45,10 @@
         self.nixosModules.gnomeSuite
       ];
 
-      services.tailscale.enable = true;
+      services.tailscale = {
+        enable = true;
+        package = pkgs-unstable.tailscale;
+      };
 
       # Localization
       time.timeZone = "Europe/Warsaw";
