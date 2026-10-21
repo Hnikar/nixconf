@@ -32,7 +32,7 @@
       networking = {
         hostName = "Amaterasu";
         timeServers = [ "192.168.88.1" ];
-        nameservers = [ "192.168.88.1" ];
+        nameservers = [ "192.168.88.44" ];
       };
 
       # System packages
