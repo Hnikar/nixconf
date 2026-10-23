@@ -155,7 +155,7 @@
         headsetcontrol
         kdePackages.qt6ct
         libsecret
-        nextcloud-client
+        opencloud-desktop
         unrar
         wget
         zip
