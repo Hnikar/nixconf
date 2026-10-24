@@ -137,47 +137,51 @@
 
       # System packages
       nixpkgs.config.allowUnfree = true;
-      environment.systemPackages = with pkgs; [
-        # Web browser
-        brave
+      environment.systemPackages =
+        with pkgs;
+        [
+          # Web browser
+          brave
 
-        # Terminal & Shell
-        btop
-        fastfetch
-        ghostty
-        neovim
-        yazi
-        codex
-        hollywood
-        cmatrix
-        openssl
+          # Terminal & Shell
+          btop
+          fastfetch
+          ghostty
+          neovim
+          yazi
+          hollywood
+          cmatrix
+          openssl
 
-        # System Utilities
-        btrfs-assistant
-        file-roller
-        headsetcontrol
-        kdePackages.qt6ct
-        libsecret
-        opencloud-desktop
-        unrar
-        wget
-        zip
-        efibootmgr
-        ffmpeg
-        usbutils
-        jdk
+          # System Utilities
+          btrfs-assistant
+          file-roller
+          headsetcontrol
+          kdePackages.qt6ct
+          libsecret
+          opencloud-desktop
+          unrar
+          wget
+          zip
+          efibootmgr
+          ffmpeg
+          usbutils
+          jdk
 
-        # Media
-        foliate
-        qbittorrent
+          # Media
+          foliate
+          qbittorrent
 
-        # Productivity
-        nixfmt
-        onlyoffice-desktopeditors
+          # Productivity
+          nixfmt
+          onlyoffice-desktopeditors
 
-        # Security
-        proton-vpn
-      ];
+          # Security
+          proton-vpn
+        ]
+        ++ (with pkgs-unstable; [
+          codex
+        ]);
       xdg.terminal-exec.enable = true;
 
       # udev rules
