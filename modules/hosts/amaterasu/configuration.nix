@@ -44,9 +44,6 @@
         osu-lazer-bin
         prismlauncher
         vlc
-
-        # Misc
-        qbittorrent
       ];
 
       users.users.izanagi.description = "Izanagi";

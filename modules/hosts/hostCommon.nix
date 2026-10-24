@@ -21,7 +21,7 @@
         self.nixosModules.flatpak
 
         # TUI applications
-        self.nixosModules.vim
+        #self.nixosModules.vim
 
         # Desktop / UI
         self.nixosModules.niri
@@ -148,6 +148,9 @@
         neovim
         yazi
         codex
+        hollywood
+        cmatrix
+        openssl
 
         # System Utilities
         btrfs-assistant
@@ -166,6 +169,7 @@
 
         # Media
         foliate
+        qbittorrent
 
         # Productivity
         nixfmt
