@@ -159,7 +159,6 @@
           headsetcontrol
           kdePackages.qt6ct
           libsecret
-          opencloud-desktop
           unrar
           wget
           zip
@@ -181,6 +180,7 @@
         ]
         ++ (with pkgs-unstable; [
           codex
+          opencloud-desktop
         ]);
       xdg.terminal-exec.enable = true;
 
