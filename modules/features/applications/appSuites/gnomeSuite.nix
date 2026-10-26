@@ -1,10 +1,10 @@
 { self, inputs, ... }:
 {
   flake.nixosModules.gnomeSuite =
-    { pkgs, ... }:
-    {
-      nixpkgs.overlays = [
-        (final: prev: {
+    { pkgs, pkgs-unstable, ... }:
+    let
+      unstable = pkgs-unstable.extend (
+        final: prev: {
           nautilus = prev.nautilus.overrideAttrs (old: {
             buildInputs =
               old.buildInputs
@@ -13,13 +13,14 @@
                 gst-plugins-bad
               ]);
           });
-        })
-      ];
-
+        }
+      );
+    in
+    {
       services.gnome.sushi.enable = true;
 
       environment.systemPackages = with pkgs; [
-        nautilus
+        unstable.nautilus
         gnome-text-editor
 
         ffmpegthumbnailer
