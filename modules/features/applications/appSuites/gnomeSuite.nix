@@ -35,6 +35,7 @@
         pika-backup
         baobab
         gnome-disk-utility
+        apostrophe
 
         ###
 
