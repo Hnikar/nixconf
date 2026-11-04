@@ -1,7 +1,7 @@
 { self, inputs, ... }:
 {
   flake.nixosModules.networking =
-    { ... }:
+    { pkgs-unstable, ... }:
     {
       networking.networkmanager = {
         enable = true;
@@ -15,6 +15,7 @@
       programs.winbox = {
         enable = true;
         openFirewall = true;
+        package = pkgs-unstable.winbox;
       };
     };
 }
