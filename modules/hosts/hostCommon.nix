@@ -148,7 +148,7 @@
           fastfetch
           ghostty
           neovim
-          yazi
+          superfile
           hollywood
           cmatrix
           openssl
@@ -166,6 +166,7 @@
           ffmpeg
           usbutils
           jdk
+          kooha
 
           # Media
           foliate
