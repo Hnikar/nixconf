@@ -167,6 +167,7 @@
           usbutils
           jdk
           kooha
+          bind
 
           # Media
           foliate
