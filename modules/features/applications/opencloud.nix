@@ -28,7 +28,7 @@
         lib.mkEnableOption "the OpenCloud Desktop application menu entry";
       options.programs.opencloud-desktop.autostartDelaySeconds = lib.mkOption {
         type = lib.types.ints.unsigned;
-        default = 10;
+        default = 3;
         description = ''
           Delay in seconds requested by OpenCloud's desktop file when the
           desktop environment launches it through XDG autostart.
@@ -37,10 +37,6 @@
 
       config = {
         environment.systemPackages = [ opencloudDesktop ];
-
-        # The boot autostart may not inherit OpenCloud's Qt wrapper environment.
-        # Expose Qt 6's QML modules to the user session.
-        environment.sessionVariables.NIXPKGS_QT6_QML_IMPORT_PATH = "${pkgs-unstable.qt6.qtdeclarative}/lib/qt-6/qml";
 
         # Niri uses systemd's XDG autostart generator, which ignores the
         # GNOME-specific delay field. Its generated unit also runs the raw
@@ -51,7 +47,7 @@
             # Reset the generated ExecStart and use the packaged Qt launcher.
             ExecStart = [
               ""
-              "${opencloudDesktop}/bin/opencloud --showsettings"
+              "${opencloudDesktop}/bin/opencloud"
             ];
           }
           // lib.optionalAttrs (cfg.autostartDelaySeconds > 0) {
