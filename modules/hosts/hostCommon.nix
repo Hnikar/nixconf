@@ -37,6 +37,7 @@
         # Desktop applications
         self.nixosModules.discord
         self.nixosModules.ghostty
+        self.nixosModules.opencloud
         self.nixosModules.spicetify
         self.nixosModules.vscode
 
@@ -182,7 +183,6 @@
         ]
         ++ (with pkgs-unstable; [
           codex
-          opencloud-desktop
         ]);
       xdg.terminal-exec.enable = true;
 
