@@ -7,6 +7,7 @@
   flake.nixosModules.hostAmaterasuConfiguration =
     {
       pkgs,
+      pkgs-unstable,
       lib,
       ...
     }:
@@ -31,20 +32,23 @@
       # Networking
       networking = {
         hostName = "Amaterasu";
-        timeServers = [ "192.168.88.1" ];
-        nameservers = [ "192.168.88.44" ];
+        timeServers = [ "192.168.50.1" ];
+        nameservers = [ "192.168.20.44" ];
       };
 
       # System packages
-      environment.systemPackages = with pkgs; [
-        # Media
-        foliate
-        joplin-desktop
-        obs-studio
-        osu-lazer-bin
-        prismlauncher
-        vlc
-      ];
+      environment.systemPackages =
+        with pkgs;
+        [
+          # Media
+          foliate
+          joplin-desktop
+          obs-studio
+          vlc
+        ]
+        ++ (with pkgs-unstable; [
+          osu-lazer-bin
+        ]);
 
       users.users.izanagi.description = "Izanagi";
     };
