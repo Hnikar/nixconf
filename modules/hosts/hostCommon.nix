@@ -149,7 +149,6 @@
           fastfetch
           ghostty
           neovim
-          superfile
           hollywood
           cmatrix
           openssl
