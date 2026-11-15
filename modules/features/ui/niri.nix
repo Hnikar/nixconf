@@ -23,7 +23,11 @@
         wantedBy = [ "graphical-session.target" ];
         partOf = [ "graphical-session.target" ];
         after = [ "graphical-session.target" ];
-        serviceConfig = { ExecStart = lib.getExe niriNotifyFocus; Restart = "on-failure"; RestartSec = 5; };
+        serviceConfig = {
+          ExecStart = lib.getExe niriNotifyFocus;
+          Restart = "on-failure";
+          RestartSec = 5;
+        };
       };
     };
 
@@ -41,19 +45,39 @@
         config.allowUnfree = true;
       };
 
-      niriNotifyFocus = let
-        python = pkgs.python3.withPackages (ps: [ ps.dbus-python ps.pygobject3 ]);
-        source = pkgs.fetchFromGitHub { owner = "Oaklight"; repo = "niri-notify-focus"; rev = "v0.2.1"; hash = "sha256-POaBIo5k4ukVTuDxaVqnc2Z+D1wk0DB6ny6U1CbaCB4="; };
-      in pkgs.stdenvNoCC.mkDerivation {
-        pname = "niri-notify-focus"; version = "0.2.1"; src = source; nativeBuildInputs = [ pkgs.makeWrapper ]; dontBuild = true;
-        installPhase = ''
-          install -Dm755 niri-notify-focus $out/libexec/niri-notify-focus
-          makeWrapper ${python}/bin/python $out/bin/niri-notify-focus --add-flags $out/libexec/niri-notify-focus
-          install -Dm644 LICENSE $out/share/licenses/niri-notify-focus/LICENSE
-          install -Dm644 config.toml.example $out/share/doc/niri-notify-focus/config.toml.example
-        '';
-        meta = { description = "Focus source window on notification activation in niri"; homepage = "https://github.com/Oaklight/niri-notify-focus"; license = lib.licenses.mit; mainProgram = "niri-notify-focus"; platforms = lib.platforms.linux; };
-      };
+      niriNotifyFocus =
+        let
+          python = pkgs.python3.withPackages (ps: [
+            ps.dbus-python
+            ps.pygobject3
+          ]);
+          source = pkgs.fetchFromGitHub {
+            owner = "Oaklight";
+            repo = "niri-notify-focus";
+            rev = "v0.2.1";
+            hash = "sha256-POaBIo5k4ukVTuDxaVqnc2Z+D1wk0DB6ny6U1CbaCB4=";
+          };
+        in
+        pkgs.stdenvNoCC.mkDerivation {
+          pname = "niri-notify-focus";
+          version = "0.2.1";
+          src = source;
+          nativeBuildInputs = [ pkgs.makeWrapper ];
+          dontBuild = true;
+          installPhase = ''
+            install -Dm755 niri-notify-focus $out/libexec/niri-notify-focus
+            makeWrapper ${python}/bin/python $out/bin/niri-notify-focus --add-flags $out/libexec/niri-notify-focus
+            install -Dm644 LICENSE $out/share/licenses/niri-notify-focus/LICENSE
+            install -Dm644 config.toml.example $out/share/doc/niri-notify-focus/config.toml.example
+          '';
+          meta = {
+            description = "Focus source window on notification activation in niri";
+            homepage = "https://github.com/Oaklight/niri-notify-focus";
+            license = lib.licenses.mit;
+            mainProgram = "niri-notify-focus";
+            platforms = lib.platforms.linux;
+          };
+        };
 
       braveSmartDelay = lib.getExe (
         pkgs.writeShellScriptBin "brave-smart-delay" ''
@@ -111,6 +135,10 @@
           match app-id="steam" title="^notificationtoasts_\\d+_desktop$"
           default-floating-position x=10 y=10 relative-to="bottom-right"
           open-focused false
+        };
+        window-rule {
+          match app-id="steam"
+          open-on-workspace "main"
         };
         window-rule {
           match title="Picture in picture"
@@ -382,6 +410,9 @@
 
         extraConfig = ''
           workspace "web" {
+            open-on-output "DP-1"
+          };
+          workspace "main" {
             open-on-output "DP-1"
           };
           workspace "social" {
