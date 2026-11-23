@@ -168,6 +168,7 @@
           jdk
           kooha
           bind
+          amdgpu_top
 
           # Media
           foliate

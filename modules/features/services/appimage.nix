@@ -10,6 +10,7 @@
       programs.appimage.binfmt = true;
       programs.appimage.package = pkgs.appimage-run.override {
         extraPkgs = pkgs: [
+          pkgs.fuse
           pkgs.icu
           pkgs.libxcrypt-legacy
           pkgs.python312

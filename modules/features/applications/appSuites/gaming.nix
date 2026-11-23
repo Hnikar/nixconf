@@ -11,12 +11,14 @@
     }:
     {
       imports = [
-        # self.nixosModules.creamlinux
+        self.nixosModules.creamlinux
         self.nixosModules.steam
       ];
 
       environment.systemPackages = with pkgs; [
         heroic
+        winetricks
+        wineWowPackages.stagingFull
       ];
 
       services.joycond.enable = true;
