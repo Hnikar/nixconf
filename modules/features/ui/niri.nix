@@ -139,7 +139,15 @@
         window-rule {
           match app-id="steam"
           open-on-workspace "main"
+          open-maximized true
         };
+
+        window-rule {
+          match app-id="code"
+          open-on-workspace "main"
+          open-maximized true
+        };
+
         window-rule {
           match title="Picture in picture"
 
