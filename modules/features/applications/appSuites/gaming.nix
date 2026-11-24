@@ -13,24 +13,14 @@
       imports = [
         self.nixosModules.creamlinux
         self.nixosModules.steam
+        self.nixosModules.wine
       ];
 
       environment.systemPackages = with pkgs; [
         heroic
-        winetricks
-        wineWowPackages.stagingFull
       ];
 
       services.joycond.enable = true;
       programs.gamemode.enable = true;
-
-      # programs.gamescope = {
-      #   enable = true;
-      #   capSysNice = true;
-      #   args = [
-      #     "--rt"
-      #     "--expose-wayland"
-      #   ];
-      # };
     };
 }
